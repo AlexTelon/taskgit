@@ -1,0 +1,71 @@
+[[task]]
+id = 1
+title = "Create GitHub repository"
+description = "Create a new GitHub repository to store the project code and documentation."
+assignee = "Alex Telon"
+priority = "High"
+due_date = "2023-03-20"
+column = "todo"
+
+[[task]]
+id = 2
+title = "Set up virtual environment"
+description = "Create a virtual environment for the project and install required dependencies."
+assignee = "Alex Telon"
+priority = "Medium"
+due_date = "2023-03-20"
+column = "todo"
+
+[[task]]
+id = 3
+title = "Define data model"
+description = "Define the data model for the task board application."
+assignee = "Alex Telon"
+priority = "High"
+due_date = "2023-03-20"
+column = "todo"
+
+[[task]]
+id = 4
+title = "Implement server-side script"
+description = "Implement a server-side script to handle CRUD operations for tasks and serve the task board HTML page."
+assignee = "Alex Telon"
+priority = "High"
+due_date = "2023-03-20"
+column = "todo"
+
+[[task]]
+id = 5
+title = "Generate HTML for task board"
+description = "Generate the HTML representation of the task board based on the tasks stored in the tasks.toml file."
+assignee = "Alex Telon"
+priority = "Medium"
+due_date = "2023-03-20"
+column = "todo"
+
+[[task]]
+id = 6
+title = "Add drag-and-drop functionality"
+description = "Add drag-and-drop functionality to the task board to allow users to move tasks between columns."
+assignee = "Alex Telon"
+priority = "High"
+due_date = "2023-04-20"
+column = "todo"
+
+[[task]]
+id = 7
+title = "Implement authentication and authorization"
+description = "Implement authentication and authorization to restrict access to the task board to authorized users."
+assignee = "Alex Telon"
+priority = "High"
+due_date = "2023-04-20"
+column = "todo"
+
+[[task]]
+id = 8
+title = "Add calendar view"
+description = "Create a calendar view of the task board that shows tasks sorted by due date."
+assignee = "Alex Telon"
+priority = "Medium"
+due_date = "2023-04-20"
+column = "todo"
