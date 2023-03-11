@@ -73,7 +73,7 @@ column = "todo"
 
 [[task]]
 id = 9
-title = "Investigate Github Actions for generating board.html"
+title = "Generate githubpages with github actions"
 description = "Ideally the user should not have to generate it manually."
 assignee = "Alex Telon"
 column = "in_progress"
