@@ -77,5 +77,3 @@ title = "Investigate Github Actions for generating board.html"
 description = "Ideally the user should not have to generate it manually."
 assignee = "Alex Telon"
 column = "in_progress"
-
-

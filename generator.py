@@ -15,13 +15,14 @@ class Task:
     def to_html(self):
         return """
         <div class="card" data-id="{}">
+          <div class="id">ID: {}</div>
           <div class="title">{}</div>
           <div class="description">{}</div>
           <div class="assignee">Assignee: {}</div>
           <div class="priority">Priority: {}</div>
           <div class="due-date">Due: {}</div>
         </div>
-        """.format(self.id, self.title, self.description, self.assignee, self.priority or '', self.due_date or '')
+        """.format(self.id, self.id, self.title, self.description, self.assignee, self.priority or '', self.due_date or '')
 
 # Read the tasks.toml file into a Python data structure
 with open('tasks.toml', 'rb') as f:
@@ -76,5 +77,5 @@ tasks_by_column['done'] = sorted([task for task in tasks if task.column == 'done
 board_html = board_html.format(todo_html, in_progress_html, done_html)
 
 # Write the HTML to a file
-with open('board.html', 'w') as f:
+with open('site/board.html', 'w') as f:
     f.write(board_html)
