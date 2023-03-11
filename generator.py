@@ -13,15 +13,15 @@ class Task:
     column: str = 'todo'
     
     def to_html(self):
-        return """
-        <div class="card" data-id="{}">
-          <div class="title">#{} {}</div>
-          <div class="description">{}</div>
-          <div class="assignee">Assignee: {}</div>
-          <div class="priority">Priority: {}</div>
-          <div class="due-date">Due: {}</div>
+        return f"""
+        <div class="card" data-id="{self.id}">
+          <div class="title">#{self.id} {self.title}</div>
+          <div class="description">{self.description}</div>
+          <div class="assignee">Assignee: {self.assignee}</div>
+          {f'<div class="priority">Priority: {self.priority}</div>' if self.priority else ''}
+          {f'<div class="due-date">Due: {self.due_date}</div>' if self.due_date else ''}
         </div>
-        """.format(self.id, self.id, self.title, self.description, self.assignee, self.priority or '', self.due_date or '')
+        """
 
 # Read the tasks.toml file into a Python data structure
 with open('tasks.toml', 'rb') as f:
