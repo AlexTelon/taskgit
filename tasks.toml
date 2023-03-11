@@ -5,7 +5,7 @@ description = "Create a new GitHub repository to store the project code and docu
 assignee = "Alex Telon"
 priority = "High"
 due_date = "2023-03-20"
-column = "todo"
+column = "done"
 
 [[task]]
 id = 2
@@ -14,7 +14,7 @@ description = "Create a virtual environment for the project and install required
 assignee = "Alex Telon"
 priority = "Medium"
 due_date = "2023-03-20"
-column = "todo"
+column = "done"
 
 [[task]]
 id = 3
@@ -41,7 +41,7 @@ description = "Generate the HTML representation of the task board based on the t
 assignee = "Alex Telon"
 priority = "Medium"
 due_date = "2023-03-20"
-column = "todo"
+column = "ongoing"
 
 [[task]]
 id = 6
@@ -69,3 +69,13 @@ assignee = "Alex Telon"
 priority = "Medium"
 due_date = "2023-04-20"
 column = "todo"
+
+
+[[task]]
+id = 9
+title = "Investigate Github Actions for generating board.html"
+description = "Ideally the user should not have to generate it manually."
+assignee = "Alex Telon"
+column = "in_progress"
+
+
