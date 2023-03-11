@@ -1,4 +1,4 @@
-import tomllib
+import toml
 import subprocess
 
 # Create an empty dictionary to store the task data
@@ -15,7 +15,7 @@ for commit in commits:
     tasks_toml = output.decode('utf-8')
     
     # Parse the tasks.toml file into a Python data structure
-    tasks_data = tomllib.loads(tasks_toml)
+    tasks_data = toml.loads(tasks_toml)
     
     # Loop through each task and add it to the tasks_dict, overwriting any existing tasks with the same ID
     for task in tasks_data['task']:
@@ -23,6 +23,6 @@ for commit in commits:
 
 # Write the latest version of each task to a new file
 tasks_latest = {'task': list(tasks_dict.values())}
-with open('tasks_latest.toml', 'w') as f:
-    tomllib.dump(tasks_latest, f)
+with open('site/tasks_latest.toml', 'w') as f:
+    toml.dump(tasks_latest, f)
 

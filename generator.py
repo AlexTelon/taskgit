@@ -45,8 +45,8 @@ board_html = """
         <h2>Todo</h2>
         {}
       </div>
-      <div class="column in-progress">
-        <h2>In Progress</h2>
+      <div class="column ongoing">
+        <h2>Ongoing</h2>
         {}
       </div>
       <div class="column done">
