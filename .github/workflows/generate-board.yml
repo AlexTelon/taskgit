@@ -17,7 +17,7 @@ jobs:
 
     - name: Generate board HTML
       run: |
-        python generate_board.py
+        python generator.py
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
