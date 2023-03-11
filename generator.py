@@ -15,8 +15,7 @@ class Task:
     def to_html(self):
         return """
         <div class="card" data-id="{}">
-          <div class="id">ID: {}</div>
-          <div class="title">{}</div>
+          <div class="title">#{} {}</div>
           <div class="description">{}</div>
           <div class="assignee">Assignee: {}</div>
           <div class="priority">Priority: {}</div>
