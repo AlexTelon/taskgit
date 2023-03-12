@@ -28,15 +28,29 @@ class Task:
         """
 
 def _generate_board_html():
-  # Read the tasks.toml file into a Python data structure
   with open('tasks.toml', 'rb') as f:
       tasks_data = tomllib.load(f)
-  
+
   # Create a list of Task instances from the tasks data
   tasks = [Task(**task_dict) for task_dict in tasks_data['task']]
 
-  # Define the HTML for the board and columns
-  board_html = """
+  # Get all unique columns from the tasks to a dict
+  columns = {'todo':[], 'ongoing':[], 'done':[]}
+  columns |= {task.column:[] for task in tasks}
+  
+  for col in columns:
+    _tasks = [task for task in tasks if task.column == col]
+    if col == 'done':
+      # Sort the backlog and ongoing tasks by priority
+      columns[col] = sorted(_tasks, key=lambda task: task.priority or "Low")
+    else:
+      # Sort the done tasks by date
+      columns[col] = sorted(_tasks, key=lambda task: task.done_date or '', reverse=True)
+
+  # Convert the tasks to HTML
+  columns = {col: ''.join([task.to_html() for task in tasks]) for col, tasks in columns.items()}
+
+  board_html = f"""
   <!DOCTYPE html>
   <html>
     <head>
@@ -48,37 +62,20 @@ def _generate_board_html():
       <div class="board">
         <div class="column todo">
           <h2>Todo</h2>
-          {}
+          {columns['todo']}
         </div>
         <div class="column ongoing">
           <h2>Ongoing</h2>
-          {}
+          {columns['ongoing']}
         </div>
         <div class="column done">
           <h2>Done</h2>
-          {}
+          {columns['done']}
         </div>
       </div>
     </body>
   </html>
   """
-
-  # Generate the HTML for each column
-  todo_html = "".join([task.to_html() for task in tasks if task.column == 'todo'])
-  ongoing_html = "".join([task.to_html() for task in tasks if task.column == 'ongoing'])
-  done_html = "".join([task.to_html() for task in tasks if task.column == 'done'])
-
-  # Sort the backlog and ongoing tasks by priority
-  tasks_by_column = {
-      'todo': sorted([task for task in tasks if task.column == 'todo'], key=lambda task: task.priority or "Low"),
-      'ongoing': sorted([task for task in tasks if task.column == 'ongoing'], key=lambda task: task.priority or "Low")
-  }
-
-  # Sort the done tasks by date
-  tasks_by_column['done'] = sorted([task for task in tasks if task.column == 'done'], key=lambda task: task.done_date or '', reverse=True)
-
-  # Combine the column HTML into the board HTML
-  board_html = board_html.format(todo_html, ongoing_html, done_html)
 
   with open('.site/index.html', 'w') as f:
       f.write(board_html)
@@ -94,3 +91,7 @@ def main():
   shutil.copy('taskgit/style.css', '.site/style.css')
 
   webbrowser.open('file://' + os.path.realpath('.site/index.html'))
+
+
+if __name__ == '__main__':
+  main()
