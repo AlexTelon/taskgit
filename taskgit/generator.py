@@ -33,9 +33,22 @@ def _generate_board_html():
   # Create a list of Task instances from the tasks data
   tasks = [Task(**task_dict) for task_dict in tasks_data['task']]
 
+  # Get the column order
+  column_order = tasks_data.get("column_order", {}).get("order", [])
   # Get all unique columns from the tasks to a dict
   columns = {task.column:[] for task in tasks}
-  
+
+  missing_columns = columns.keys() - column_order
+  if any(missing_columns):
+      current = f"order = {column_order}"
+      fixed = f"order = {column_order + list(missing_columns)}"
+      hint = f"""Consider adding the following to your tasks.toml file:
+[column_order]
+{fixed}
+{' ' * (len(current)+1) + '^' * (len(fixed) - len(current) - 1)}
+      """
+      quit(f"columns {list(missing_columns)} used but missing in olumn_order:\n" + hint)
+
   for col in columns:
     _tasks = [task for task in tasks if task.column == col]
     if col == 'done':
@@ -57,7 +70,7 @@ def _generate_board_html():
       </div>
       """
 
-  column_html = ''.join([generate_column_html(name) for name in columns])
+  column_html = ''.join([generate_column_html(name) for name in column_order])
 
   board_html = f"""
   <!DOCTYPE html>

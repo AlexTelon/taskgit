@@ -1,3 +1,7 @@
+[column_order]
+order = ['backlog', 'todo', 'blocked', 'ongoing', 'done']
+
+
 [[task]]
 id = 5
 title = "Generate HTML for task board"
@@ -22,13 +26,6 @@ assignee = "Alex Telon"
 column = "done"
 
 [[task]]
-id = 11
-title = "Create the columns dynamically from the tasks.toml file"
-description = "If I add a column = blocked then a new column for that should be created."
-assignee = "Alex Telon"
-column = "done"
-
-[[task]]
 id = 12
 title = "Testing backlog"
 description = "stuff."
@@ -46,5 +43,26 @@ column = "blocked"
 id = 14
 title = "Add meta info: Specify order of columns"
 description = "However we would need to specify the order somewhere somehow."
+assignee = "Alex Telon"
+column = "done"
+
+[[task]]
+id = 15
+title = "Figure out a nicer close process"
+description = """Should removing a task be considered closing it?
+
+In case you dont want to update the text as you close it you could just remove it in a commit.
+
+But in case you want to update the text before you remove then right now you would first commit the
+change and then commit the removal..
+
+Also history.py should be updated to reflect that if the task has been removed it should always be closed?
+But what of other types of removal like removed, deleted?
+
+I want to keep this simple yet flexible. So either make this configurable or make the code small and simple
+so that others can modify the code.
+
+Maybe not have a done/close column at all? We can ofc get it from history. But maybe it should only be visible in that view?
+"""
 assignee = "Alex Telon"
 column = "ongoing"
