@@ -24,6 +24,27 @@ column = "done"
 [[task]]
 id = 11
 title = "Create the columns dynamically from the tasks.toml file"
-description = "If I add a column = blocked then a new column for that should be created. However we would need to specify the order somewhere somehow."
+description = "If I add a column = blocked then a new column for that should be created."
+assignee = "Alex Telon"
+column = "done"
+
+[[task]]
+id = 12
+title = "Testing backlog"
+description = "stuff."
+assignee = "Alex Telon"
+column = "backlog"
+
+[[task]]
+id = 13
+title = "Testing blocked"
+description = "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum."
+assignee = "Alex Telon"
+column = "blocked"
+
+[[task]]
+id = 14
+title = "Add meta info: Specify order of columns"
+description = "However we would need to specify the order somewhere somehow."
 assignee = "Alex Telon"
 column = "ongoing"
