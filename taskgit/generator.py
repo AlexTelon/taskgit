@@ -1,5 +1,9 @@
+import os
+import shutil
+import sys
 import tomllib
 from dataclasses import dataclass
+import webbrowser
 
 @dataclass
 class Task:
@@ -23,7 +27,7 @@ class Task:
         </div>
         """
 
-def main():
+def _generate_board_html():
   # Read the tasks.toml file into a Python data structure
   with open('tasks.toml', 'rb') as f:
       tasks_data = tomllib.load(f)
@@ -76,5 +80,17 @@ def main():
   # Combine the column HTML into the board HTML
   board_html = board_html.format(todo_html, ongoing_html, done_html)
 
-  with open('site/board.html', 'w') as f:
+  with open('.site/index.html', 'w') as f:
       f.write(board_html)
+
+def main():
+
+  # Create a .site directory.
+  os.makedirs('.site', exist_ok=True)
+
+  _generate_board_html()
+
+  # copy the style.css file to the site directory
+  shutil.copy('taskgit/style.css', '.site/style.css')
+
+  webbrowser.open('file://' + os.path.realpath('.site/index.html'))

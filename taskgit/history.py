@@ -19,5 +19,5 @@ for commit in commits[::-1]:
 
 # Write the latest version of each task to a new file
 tasks_latest = {'task': list(tasks_dict.values())}
-with open('site/tasks_latest.toml', 'w') as f:
+with open('tasks_latest.toml', 'w') as f:
     toml.dump(tasks_latest, f)
