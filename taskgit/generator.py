@@ -34,8 +34,7 @@ def _generate_board_html():
   tasks = [Task(**task_dict) for task_dict in tasks_data['task']]
 
   # Get all unique columns from the tasks to a dict
-  columns = {'todo':[], 'ongoing':[], 'done':[]}
-  columns |= {task.column:[] for task in tasks}
+  columns = {task.column:[] for task in tasks}
   
   for col in columns:
     _tasks = [task for task in tasks if task.column == col]
