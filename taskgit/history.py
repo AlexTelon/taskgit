@@ -1,21 +1,17 @@
 import toml
 import subprocess
 
-# Create an empty dictionary to store the task data
-tasks_dict = {}
+# Stores id: task dict
+tasks_dict: dict[int, dict] = {}
 
-# Get the git log for the tasks.toml file in reverse order
 output = subprocess.check_output(['git', 'log', '--pretty=format:%H', '--', 'tasks.toml'])
-commits = output.decode('utf-8').splitlines()[::-1]
+commits = output.decode('utf-8').splitlines()
 
 # Loop through each commit in reverse order and extract the task data
-for commit in commits:
+for commit in commits[::-1]:
     # Checkout the commit and get the contents of tasks.toml
     output = subprocess.check_output(['git', 'show', commit + ':tasks.toml'])
-    tasks_toml = output.decode('utf-8')
-    
-    # Parse the tasks.toml file into a Python data structure
-    tasks_data = toml.loads(tasks_toml)
+    tasks_data = toml.loads(output.decode('utf-8'))
     
     # Loop through each task and add it to the tasks_dict, overwriting any existing tasks with the same ID
     for task in tasks_data['task']:
@@ -25,4 +21,3 @@ for commit in commits:
 tasks_latest = {'task': list(tasks_dict.values())}
 with open('site/tasks_latest.toml', 'w') as f:
     toml.dump(tasks_latest, f)
-

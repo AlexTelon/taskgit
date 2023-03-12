@@ -13,3 +13,17 @@ title = "Generate githubpages with github actions"
 description = "Ideally the user should not have to generate it manually. It would be nice with a more generic solution however."
 assignee = "Alex Telon"
 column = "ongoing"
+
+[[task]]
+id = 10
+title = "Make a local python package"
+description = "So I can just call taskgit directly."
+assignee = "Alex Telon"
+column = "ongoing"
+
+[[task]]
+id = 11
+title = "Create the columns dynamically from the tasks.toml file"
+description = "If I add a column = blocked then a new column for that should be created. However we would need to specify the order somewhere somehow."
+assignee = "Alex Telon"
+column = "todo"
