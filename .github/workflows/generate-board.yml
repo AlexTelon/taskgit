@@ -17,6 +17,8 @@ jobs:
 
     - name: Generate board HTML
       run: |
+        ls -la .
+        ls -la taskgit/
         python taskgit/generator.py
 
     - name: Deploy to GitHub Pages
