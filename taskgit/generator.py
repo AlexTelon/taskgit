@@ -1,6 +1,5 @@
 import os
 import shutil
-import sys
 import tomllib
 from dataclasses import dataclass
 import webbrowser
@@ -50,6 +49,17 @@ def _generate_board_html():
   # Convert the tasks to HTML
   columns = {col: ''.join([task.to_html() for task in tasks]) for col, tasks in columns.items()}
 
+  # Generate column html.
+  def generate_column_html(name):
+      return f"""
+      <div class="column {name}">
+        <h2>{name.title()}</h2>
+        {columns[name]}
+      </div>
+      """
+
+  column_html = ''.join([generate_column_html(name) for name in columns])
+
   board_html = f"""
   <!DOCTYPE html>
   <html>
@@ -60,18 +70,7 @@ def _generate_board_html():
     </head>
     <body>
       <div class="board">
-        <div class="column todo">
-          <h2>Todo</h2>
-          {columns['todo']}
-        </div>
-        <div class="column ongoing">
-          <h2>Ongoing</h2>
-          {columns['ongoing']}
-        </div>
-        <div class="column done">
-          <h2>Done</h2>
-          {columns['done']}
-        </div>
+        {column_html}
       </div>
     </body>
   </html>
