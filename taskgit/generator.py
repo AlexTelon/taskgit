@@ -27,8 +27,11 @@ class Task:
         """
 
 def _generate_board_html():
-  with open('tasks.toml', 'rb') as f:
-      tasks_data = tomllib.load(f)
+  try:
+    with open('tasks.toml', 'rb') as f:
+        tasks_data = tomllib.load(f)
+  except FileNotFoundError:
+      quit('tasks.toml file not found.')
 
   if 'task' not in tasks_data:
       quit('No tasks found in tasks.toml.')

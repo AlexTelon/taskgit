@@ -52,3 +52,24 @@ Maybe not have a done/close column at all? We can ofc get it from history. But m
 """
 assignee = "Alex Telon"
 column = "ongoing"
+
+[[task]]
+id = 16
+title = "Implement taskgit init"
+description = "It creates a template tasks.toml file for you!"
+assignee = "Alex Telon"
+column = "todo"
+
+[[task]]
+id = 17
+title = "Error on duplicate task id"
+description = ""
+assignee = "Alex Telon"
+column = "todo"
+
+[[task]]
+id = 18
+title = "Default column_order"
+description = ""
+assignee = "Alex Telon"
+column = "todo"
