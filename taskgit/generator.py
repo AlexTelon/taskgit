@@ -39,8 +39,9 @@ def _generate_board_html():
   # Create a list of Task instances from the tasks data
   tasks = [Task(**task_dict) for task_dict in tasks_data['task']]
 
-  # Get the column order
-  column_order = tasks_data.get("column_order", {}).get("order", [])
+  # Get the column order. If not specified, use the default order.
+  column_order = tasks_data.get("column_order", {}).get("order", ['todo', 'ongoing', 'done'])
+
   # Get all unique columns from the tasks to a dict
   columns = {task.column:[] for task in tasks}
 

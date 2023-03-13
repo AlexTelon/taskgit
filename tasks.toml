@@ -26,13 +26,6 @@ assignee = "Alex Telon"
 column = "done"
 
 [[task]]
-id = 14
-title = "Add meta info: Specify order of columns"
-description = "However we would need to specify the order somewhere somehow."
-assignee = "Alex Telon"
-column = "done"
-
-[[task]]
 id = 15
 title = "Figure out a nicer close process"
 description = """Should removing a task be considered closing it?
@@ -63,13 +56,6 @@ column = "todo"
 [[task]]
 id = 17
 title = "Error on duplicate task id"
-description = ""
-assignee = "Alex Telon"
-column = "todo"
-
-[[task]]
-id = 18
-title = "Default column_order"
 description = ""
 assignee = "Alex Telon"
 column = "todo"
