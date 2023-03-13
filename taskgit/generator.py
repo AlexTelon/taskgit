@@ -30,6 +30,9 @@ def _generate_board_html():
   with open('tasks.toml', 'rb') as f:
       tasks_data = tomllib.load(f)
 
+  if 'task' not in tasks_data:
+      quit('No tasks found in tasks.toml.')
+
   # Create a list of Task instances from the tasks data
   tasks = [Task(**task_dict) for task_dict in tasks_data['task']]
 
