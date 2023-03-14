@@ -47,13 +47,6 @@ assignee = "Alex Telon"
 column = "ongoing"
 
 [[task]]
-id = 16
-title = "Implement taskgit init"
-description = "It creates a template tasks.toml file for you!"
-assignee = "Alex Telon"
-column = "todo"
-
-[[task]]
 id = 17
 title = "Error on duplicate task id"
 description = ""

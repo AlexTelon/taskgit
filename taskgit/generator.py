@@ -1,6 +1,7 @@
 import os
 import shutil
-import tomllib
+import sys
+import toml
 from dataclasses import dataclass
 import webbrowser
 
@@ -14,7 +15,7 @@ class Task:
     due_date: str = None
     done_date: str = None
     column: str = 'todo'
-    
+
     def to_html(self):
         return f"""
         <div class="card" data-id="{self.id}">
@@ -28,10 +29,10 @@ class Task:
 
 def _generate_board_html():
   try:
-    with open('tasks.toml', 'rb') as f:
-        tasks_data = tomllib.load(f)
+    with open('tasks.toml', 'r') as f:
+        tasks_data = toml.load(f)
   except FileNotFoundError:
-      quit('tasks.toml file not found.')
+      quit('tasks.toml file not found. Run "taskgit init" to create a new tasks.toml file.')
 
   if 'task' not in tasks_data:
       quit('No tasks found in tasks.toml.')
@@ -70,7 +71,8 @@ def _generate_board_html():
 
   # Generate column html.
   def generate_column_html(name):
-      return f"""
+      if name not in columns: return ''
+      else: return f"""
       <div class="column {name}">
         <h2>{name.title()}</h2>
         {columns[name]}
@@ -99,6 +101,21 @@ def _generate_board_html():
       f.write(board_html)
 
 def main():
+  if len(sys.argv) > 1 and sys.argv[1] == 'init':
+    # create a example task wiht named parameters
+    example_tasks = [
+       {'id': 1, 'title':'Simple example' },
+       {
+       'id': 2,
+       'title': 'Larger example',
+       'description': 'Description here',
+       'assignee': 'Alex Telon',
+       'column': 'ongoing',
+       }
+    ]
+    with open('tasks.toml', 'w') as f:
+        toml.dump({'task': example_tasks}, f)
+    quit('Created tasks.toml file.')
 
   # Create a .site directory.
   os.makedirs('.site', exist_ok=True)
