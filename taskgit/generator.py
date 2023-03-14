@@ -1,3 +1,4 @@
+from collections import Counter
 import os
 import shutil
 import sys
@@ -39,6 +40,10 @@ def _generate_board_html():
 
   # Create a list of Task instances from the tasks data
   tasks = [Task(**task_dict) for task_dict in tasks_data['task']]
+
+  # check tasks.id is unique.
+  if any(duplicates := [id for id, count in Counter([task.id for task in tasks]).items() if count > 1]):
+    quit(f"Duplicate task ids: {duplicates}")
 
   # Get the column order. If not specified, use the default order.
   column_order = tasks_data.get("column_order", {}).get("order", ['todo', 'ongoing', 'done'])
