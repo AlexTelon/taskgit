@@ -44,4 +44,22 @@ so that others can modify the code.
 Maybe not have a done/close column at all? We can ofc get it from history. But maybe it should only be visible in that view?
 """
 assignee = "Alex Telon"
+column = "todo"
+
+
+[[task]]
+id = 16
+title = "Running taskgit in other repo is broken"
+description = """We get this exception currently:
+
+FileNotFoundError: [Errno 2] No such file or directory: 'taskgit/style.css'
+"""
+assignee = "Alex Telon"
 column = "ongoing"
+
+[[task]]
+id = 17
+title = "tasks can get too wide"
+description = "Long tasks can cause a column to take up like 50% of the screen."
+assignee = "Alex Telon"
+column = "todo"
