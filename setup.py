@@ -6,7 +6,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'taskgit=taskgit.generator:main',
+            'taskgit=taskgit.main:main',
         ],
     },
     install_requires=[
