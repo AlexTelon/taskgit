@@ -1,4 +1,4 @@
-[column_order]
+[meta]
 order = ['todo', 'ongoing', 'done']
 
 

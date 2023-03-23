@@ -46,7 +46,9 @@ def _generate_board_html():
     quit(f"Duplicate task ids: {duplicates}")
 
   # Get the column order. If not specified, use the default order.
-  column_order = tasks_data.get("column_order", {}).get("order", ['todo', 'ongoing', 'done'])
+
+  meta = tasks_data.get("meta", {})
+  column_order = meta.get("order", ['todo', 'ongoing', 'done'])
 
   # Get all unique columns from the tasks to a dict
   columns = {task.column:[] for task in tasks}
