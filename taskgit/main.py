@@ -49,9 +49,10 @@ def _generate_board_html():
 
   meta = tasks_data.get("meta", {})
   column_order = meta.get("order", ['todo', 'ongoing', 'done'])
+  hidden_columns = meta.get("hidden", [])
 
   # Get all unique columns from the tasks to a dict
-  columns = {task.column:[] for task in tasks}
+  columns = {task.column:[] for task in tasks if task.column not in hidden_columns}
 
   missing_columns = columns.keys() - column_order
   if any(missing_columns):
@@ -62,7 +63,7 @@ def _generate_board_html():
 {fixed}
 {' ' * (len(current)+1) + '^' * (len(fixed) - len(current) - 1)}
       """
-      quit(f"columns {list(missing_columns)} used but missing in olumn_order:\n" + hint)
+      quit(f"columns {list(missing_columns)} used but missing in column_order:\n" + hint)
 
   for col in columns:
     _tasks = [task for task in tasks if task.column == col]

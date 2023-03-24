@@ -1,5 +1,6 @@
 [meta]
 order = ['todo', 'ongoing', 'done']
+hidden = ['backlog']
 
 
 [[task]]
@@ -34,28 +35,5 @@ column = "todo"
 id = 17
 title = "tasks can get too wide"
 description = "Long tasks can cause a column to take up like 50% of the screen."
-assignee = "Alex Telon"
-column = "todo"
-
-[[task]]
-id = 18
-title = "Hide tasks?"
-description = """Like things I want to add to a backlog and dont want to show on the current board.
-
-For the concept of archiving one can just remove tasks and its in git. But I guess that it would be hard knowing the difference between a task that has been archived and removed.
-And backlog vs todo is similar to archiving mentioned above.
-
-Maybe something similar to the meta information for order:
-
-    [column_order]
-    order = ['todo', 'ongoing', 'done']
-
-could work?
-
-        [meta]
-        order = ['todo', 'ongoing', 'done']
-        hide = ['backlog']
-
-"""
 assignee = "Alex Telon"
 column = "todo"
