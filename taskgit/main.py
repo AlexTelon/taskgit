@@ -19,8 +19,12 @@ def init():
       'column': 'ongoing',
       }
   ]
-  with open('tasks.toml', 'w') as f:
-      toml.dump({'task': example_tasks}, f)
+
+  if os.path.exists('tasks.toml'):
+    raise Exception('tasks.toml file already exists!')
+  else:
+    with open('tasks.toml', 'w') as f:
+        toml.dump({'task': example_tasks}, f)
 
 def create_webpage():
   # Create a .site directory.
@@ -47,6 +51,7 @@ def create_webpage():
 def open_webpage():
    webbrowser.open('file://' + os.path.realpath('.site/index.html'))
 
+
 def main():
   parser = argparse.ArgumentParser(prog='taskgit', description='A tool for managing tasks with git')
   subparsers = parser.add_subparsers(dest='command', help='Sub-command help')
@@ -56,13 +61,15 @@ def main():
 
   args = parser.parse_args()
 
-  if args.command == 'init':
-   init()
-   quit('Created tasks.toml file.')
+  try:
+    if args.command == 'init':
+      init()
+      quit('Created tasks.toml file.')
 
-  create_webpage()
-  open_webpage()
-
+    create_webpage()
+    open_webpage()
+  except Exception as e:
+    quit(e)
 
 if __name__ == '__main__':
   main()
