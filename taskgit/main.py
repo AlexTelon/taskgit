@@ -1,6 +1,6 @@
+import argparse
 import os
 import shutil
-import sys
 import toml
 
 import webbrowser
@@ -9,8 +9,16 @@ from .gen import generate_board_html
 
 
 def main():
-  if len(sys.argv) > 1 and sys.argv[1] == 'init':
-    # create a example task wiht named parameters
+  parser = argparse.ArgumentParser(prog='taskgit', description='A tool for managing tasks with git')
+  subparsers = parser.add_subparsers(dest='command', help='Sub-command help')
+
+  subparsers.add_parser('init', help='Create a new tasks.toml file')
+  subparsers.add_parser('add',  help='Not implemented yet')
+
+  args = parser.parse_args()
+
+  if args.command == 'init':
+    # create a example task with named parameters
     example_tasks = [
        {'id': 1, 'title':'Simple example' },
        {
