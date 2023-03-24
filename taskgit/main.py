@@ -27,6 +27,18 @@ def init():
         with open("tasks.toml", "w") as f:
             toml.dump({"task": example_tasks}, f)
 
+def add():
+    """Add a line at the bottom of the taskgit.toml file with the correct format"""
+    with open("tasks.toml", "r") as f:
+        tasks_data = toml.load(f)
+
+    last_id = tasks_data["task"][-1]["id"]
+
+    new_task = {"id": last_id + 1, "title": "New task"}
+    tasks_data["task"].append(new_task)
+
+    with open("tasks.toml", "a") as f:
+        toml.dump({"task": [new_task]}, f)
 
 def create_webpage():
     os.makedirs(".site", exist_ok=True)
@@ -68,9 +80,12 @@ def main():
         if args.command == "init":
             init()
             quit("Created tasks.toml file.")
+        elif args.command == "add":
+            add()
+        else:
+          create_webpage()
+          open_webpage()
 
-        create_webpage()
-        open_webpage()
     except Exception as e:
         quit(e)
 

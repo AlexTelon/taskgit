@@ -61,7 +61,7 @@ Something like that. Ideally without too much manual work.
 I will add something like this and explore what I prefer.
 """
 assignee = "Alex Telon"
-column = "todo"
+column = "ongoing"
 
 
 [[task]]
@@ -82,3 +82,4 @@ description = """Should we skip Id's? Or should we have them but they are guids 
 But editing a file by hand would be harder. You would kindof have to use something like `taskgit add "title"` or `taskgit new` to create a template task with a guid to start with?"""
 assignee = "Alex Telon"
 column = "todo"
+
