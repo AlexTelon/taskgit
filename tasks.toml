@@ -50,19 +50,6 @@ git merges are gonna be a problem...
 assignee = "Alex Telon"
 column = "todo"
 
-[[task]]
-id = 20
-title = "taskgit add task (a cli to edit these files)"
-description = """
-
-taskgit add "Create a cli to edit tasks"
-
-Something like that. Ideally without too much manual work.
-I will add something like this and explore what I prefer.
-"""
-assignee = "Alex Telon"
-column = "ongoing"
-
 
 [[task]]
 id = 21
@@ -83,3 +70,9 @@ But editing a file by hand would be harder. You would kindof have to use somethi
 assignee = "Alex Telon"
 column = "todo"
 
+[[task]]
+id = 23
+title = "Improve err handling"
+description = "Right now it does not give line numbers and context for unexpexted errors"
+author = "Alex Telon"
+column = "todo"

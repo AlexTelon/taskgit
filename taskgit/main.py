@@ -32,17 +32,19 @@ def add(**kwargs):
     with open("tasks.toml", "r") as f:
         tasks_data = toml.load(f)
 
-    last_id = tasks_data["task"][-1]["id"]
-
-    new_task = {
-        "id": kwargs.get('id', last_id + 1),
-        "title": kwargs.get('title', "New task"),
-        }
+    new_task = {k:v for k,v in kwargs.items() if v is not None}
+    if 'id' not in new_task:
+        new_task['id'] = int(tasks_data["task"][-1]["id"]) + 1
+    if 'column' not in new_task:
+        new_task['column'] = 'todo'
 
     tasks_data["task"].append(new_task)
 
     with open("tasks.toml", "a") as f:
-        toml.dump({"task": [new_task]}, f)
+        content = toml.dumps({"task": [new_task]})
+        print('Added task:')
+        print(content.strip())
+        f.write(content)
 
 def create_webpage():
     os.makedirs(".site", exist_ok=True)
@@ -76,19 +78,22 @@ def main():
     subparsers = parser.add_subparsers(dest="command", help="Sub-command help")
 
     subparsers.add_parser("init", help="Create a new tasks.toml file")
+    add_parser = subparsers.add_parser("add", help="Flexible cli for adding tasks. (write any and all --key value you wish)")
 
-    add_parser = subparsers.add_parser("add", help="Add a new task")
-    add_parser.add_argument("--id", type=int, help="Task ID")
-    add_parser.add_argument("--title", help="Task title")
-
-    args = parser.parse_args()
+    args, unknown_args = parser.parse_known_args()
 
     try:
         if args.command == "init":
             init()
             quit("Created tasks.toml file.")
         elif args.command == "add":
-            add(id=args.id, title=args.title)
+            kwargs = {}
+            # pairwise go over --key value --key value
+            for i in range(0, len(unknown_args), 2):
+                key = unknown_args[i].lstrip("-")
+                value = unknown_args[i+1] if i+1 < len(unknown_args) else ""
+                kwargs[key] = value
+            add(**kwargs)
         else:
           create_webpage()
           open_webpage()

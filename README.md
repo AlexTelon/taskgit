@@ -15,9 +15,20 @@ python -m pip install .
 ## Usage
 
 ```bash
-# In a directory where you have a task.toml file
+# Create a tasks.toml
+taskgit init
+
+# This will generate a static webpage showing the tasks defined in tasks.toml.
+# It will also open it for you in your default browser.
 taskgit
-# This will generate a static webpage in a .site/ directory and open it in your default browser.
+
+# Create a minimal template for a task at the bottom.
+taskgit add
+
+# Use any and all args you can think of and it will write it to the task
+taskgit add --title Improve err handling --description "Right now it does not give line numbers and context for unexpexted errors" --author "Alex Telon"
+
+# But feel free to edit the text manually too!
 ```
 
 ## Task.toml
