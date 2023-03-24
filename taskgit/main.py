@@ -27,14 +27,18 @@ def init():
         with open("tasks.toml", "w") as f:
             toml.dump({"task": example_tasks}, f)
 
-def add():
+def add(**kwargs):
     """Add a line at the bottom of the taskgit.toml file with the correct format"""
     with open("tasks.toml", "r") as f:
         tasks_data = toml.load(f)
 
     last_id = tasks_data["task"][-1]["id"]
 
-    new_task = {"id": last_id + 1, "title": "New task"}
+    new_task = {
+        "id": kwargs.get('id', last_id + 1),
+        "title": kwargs.get('title', "New task"),
+        }
+
     tasks_data["task"].append(new_task)
 
     with open("tasks.toml", "a") as f:
@@ -72,7 +76,10 @@ def main():
     subparsers = parser.add_subparsers(dest="command", help="Sub-command help")
 
     subparsers.add_parser("init", help="Create a new tasks.toml file")
-    subparsers.add_parser("add", help="Not implemented yet")
+
+    add_parser = subparsers.add_parser("add", help="Add a new task")
+    add_parser.add_argument("--id", type=int, help="Task ID")
+    add_parser.add_argument("--title", help="Task title")
 
     args = parser.parse_args()
 
@@ -81,7 +88,7 @@ def main():
             init()
             quit("Created tasks.toml file.")
         elif args.command == "add":
-            add()
+            add(id=args.id, title=args.title)
         else:
           create_webpage()
           open_webpage()
