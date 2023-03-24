@@ -3,27 +3,11 @@ order = ['todo', 'ongoing', 'done']
 
 
 [[task]]
-id = 5
-title = "Generate HTML for task board"
-description = "Generate the HTML representation of the task board based on the tasks stored in the tasks.toml file."
-assignee = "Alex Telon"
-priority = "Medium"
-due_date = "2023-03-20"
-column = "done"
-
-[[task]]
 id = 9
 title = "Generate githubpages with github actions"
 description = "Ideally the user should not have to generate it manually. It would be nice with a more generic solution however. Putting this on hold for now."
 assignee = "Alex Telon"
-column = "todo"
-
-[[task]]
-id = 10
-title = "Make a local python package"
-description = "So I can just call taskgit directly."
-assignee = "Alex Telon"
-column = "done"
+column = "backlog"
 
 [[task]]
 id = 15
@@ -45,17 +29,6 @@ Maybe not have a done/close column at all? We can ofc get it from history. But m
 """
 assignee = "Alex Telon"
 column = "todo"
-
-
-[[task]]
-id = 16
-title = "Running taskgit in other repo is broken"
-description = """We get this exception currently:
-
-FileNotFoundError: [Errno 2] No such file or directory: 'taskgit/style.css'
-"""
-assignee = "Alex Telon"
-column = "ongoing"
 
 [[task]]
 id = 17

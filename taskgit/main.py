@@ -130,7 +130,9 @@ def main():
   _generate_board_html()
 
   # copy the style.css file to the site directory
-  shutil.copy('taskgit/style.css', '.site/style.css')
+  pkg_path = os.path.dirname(os.path.abspath(__file__))
+  shutil.copy(os.path.join(pkg_path, 'style.css'), '.site/style.css')
+
 
   webbrowser.open('file://' + os.path.realpath('.site/index.html'))
 
