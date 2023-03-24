@@ -12,11 +12,11 @@ def init():
   example_tasks = [
       {'id': 1, 'title':'Simple example' },
       {
-      'id': 2,
-      'title': 'Larger example',
-      'description': 'Description here',
-      'assignee': 'Alex Telon',
-      'column': 'ongoing',
+        'id': 2,
+        'title': 'Larger example',
+        'description': 'Description here',
+        'assignee': 'Alex Telon',
+        'column': 'ongoing',
       }
   ]
 
@@ -27,19 +27,15 @@ def init():
         toml.dump({'task': example_tasks}, f)
 
 def create_webpage():
-  # Create a .site directory.
   os.makedirs('.site', exist_ok=True)
 
   try:
     with open('tasks.toml', 'r') as f:
         tasks_data = toml.load(f)
   except FileNotFoundError:
-      quit('tasks.toml file not found. Run "taskgit init" to create a new tasks.toml file.')
+      raise Exception('tasks.toml file not found. Run "taskgit init" to create a new tasks.toml file.')
 
-  try:
-    board_html = generate_board_html(tasks_data)
-  except Exception as e:
-    quit(e)
+  board_html = generate_board_html(tasks_data)
 
   with open('.site/index.html', 'w') as f:
         f.write(board_html)
