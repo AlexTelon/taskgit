@@ -37,3 +37,48 @@ title = "tasks can get too wide"
 description = "Long tasks can cause a column to take up like 50% of the screen."
 assignee = "Alex Telon"
 column = "todo"
+
+[[task]]
+id = 19
+title = "Detect if historic id's are reused and err"
+description = """If one closes the last id from tasks.toml it is easy to forget that it has been used already. We should detect that and give an err.
+
+We need to store this information somewhere. I dont want to crawl all of git history to figure this out.
+
+git merges are gonna be a problem...
+"""
+assignee = "Alex Telon"
+column = "todo"
+
+[[task]]
+id = 20
+title = "taskgit add task (a cli to edit these files)"
+description = """
+
+taskgit add "Create a cli to edit tasks"
+
+Something like that. Ideally without too much manual work.
+I will add something like this and explore what I prefer.
+"""
+assignee = "Alex Telon"
+column = "todo"
+
+
+[[task]]
+id = 21
+title = "Rethink format and what this really is"
+description = """I mean this formfactor could mean we try things a little differently? Do we really need id's now that it is in git?
+
+I dont know, but have a feeling there are interesting things here to explore.
+"""
+assignee = "Alex Telon"
+column = "todo"
+
+[[task]]
+id = 22
+title = "How to solve potential git merge conflicts with id's"
+description = """Should we skip Id's? Or should we have them but they are guids or something instead?
+
+But editing a file by hand would be harder. You would kindof have to use something like `taskgit add "title"` or `taskgit new` to create a template task with a guid to start with?"""
+assignee = "Alex Telon"
+column = "todo"
