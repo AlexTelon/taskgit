@@ -24,7 +24,7 @@ class Task:
         </div>
         """
 
-def parse_tasks(tasks_data: str) -> list[Task]:
+def create_tasks(tasks_data: str) -> list[Task]:
     if "task" not in tasks_data:
         raise Exception("No tasks found in tasks.toml.")
 
@@ -49,12 +49,15 @@ def validate_ids(tasks: list[Task]):
         raise Exception(f"Duplicate task ids: {duplicates}")
     return tasks
 
-def create_columns(tasks: list[Task], meta: dict) -> dict[str, list]:
+def create_columns(tasks: list[Task], tasks_data: str) -> dict[str, list]:
+    meta = parse_meta(tasks_data)
     hidden_columns = meta['hidden']
     column_order = meta['order']
 
     # Get all unique columns from the tasks to a dict
     columns = {task.column: [] for task in tasks if task.column not in hidden_columns}
+    # sort columns on column_order
+    columns = {col: columns[col] for col in column_order if col in columns}
 
     missing_columns = columns.keys() - column_order
     if any(missing_columns):
@@ -83,10 +86,9 @@ def sort_tasks(tasks: list[Task], columns: dict[str, list]) -> dict[str, list[Ta
 
 def generate_board_html(tasks_data: str) -> str:
     """Generate the HTML for the board from the tasks data and returns a html string."""
-    tasks = parse_tasks(tasks_data)
-    meta = parse_meta(tasks_data)
+    tasks = create_tasks(tasks_data)
+    columns = create_columns(tasks, tasks_data)
     tasks = validate_ids(tasks)
-    columns = create_columns(tasks, meta)
     sort_tasks(tasks, columns)
 
     # Convert the tasks to HTML
@@ -104,7 +106,7 @@ def generate_board_html(tasks_data: str) -> str:
       </div>
       """
 
-    column_html = "".join([generate_column_html(name) for name in meta['order']])
+    column_html = "".join([generate_column_html(name) for name in columns.keys()])
 
     board_html = f"""
   <!DOCTYPE html>
