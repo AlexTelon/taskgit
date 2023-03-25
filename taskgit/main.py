@@ -1,5 +1,7 @@
 import argparse
 import os
+import pathlib
+from pathlib import Path
 import shutil
 import toml
 
@@ -46,25 +48,24 @@ def add(**kwargs):
         print(content.strip())
         f.write(content)
 
-def create_webpage():
-    os.makedirs(".site", exist_ok=True)
-
+def load_tasks(filename="tasks.toml"):
     try:
-        with open("tasks.toml", "r") as f:
-            tasks_data = toml.load(f)
+        with open(filename, "r") as f:
+            return toml.load(f)
     except FileNotFoundError:
         raise Exception(
             'tasks.toml file not found. Run "taskgit init" to create a new tasks.toml file.'
         )
 
-    board_html = generate_board_html(tasks_data)
-
+def write_webpage(html,):
+    os.makedirs(".site", exist_ok=True)
     with open(".site/index.html", "w") as f:
-        f.write(board_html)
+        f.write(html)
 
-    # copy the style.css file to the site directory
-    pkg_path = os.path.dirname(os.path.abspath(__file__))
-    shutil.copy(os.path.join(pkg_path, "style.css"), ".site/style.css")
+    pkg_path = Path(__file__).resolve().parent
+    source = pkg_path / "style.css"
+    dest = Path(".site") / "style.css"
+    shutil.copy(source, dest)
 
 
 def open_webpage():
@@ -95,7 +96,9 @@ def main():
                 kwargs[key] = value
             add(**kwargs)
         else:
-          create_webpage()
+          tasks = load_tasks()
+          html = generate_board_html(tasks)
+          write_webpage(html)
           open_webpage()
 
     except Exception as e:

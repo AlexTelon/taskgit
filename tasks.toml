@@ -74,5 +74,18 @@ column = "todo"
 id = 23
 title = "Improve err handling"
 description = "Right now it does not give line numbers and context for unexpexted errors"
-author = "Alex Telon"
+assignee = "Alex Telon"
 column = "todo"
+
+[[task]]
+title = "Refactor generate_board_html"
+assignee = "Alex Telon"
+id = 24
+column = "todo"
+
+[[task]]
+title = "taskgit modify <id> ..."
+assignee = "Alex Telon"
+id = 25
+column = "todo"
+
