@@ -81,11 +81,22 @@ column = "todo"
 title = "Refactor generate_board_html"
 assignee = "Alex Telon"
 id = 24
-column = "todo"
+column = "ongoing"
 
 [[task]]
 title = "taskgit modify <id> ..."
 assignee = "Alex Telon"
 id = 25
+column = "todo"
+
+[[task]]
+title = "Nicer errors for unknown keys in toml"
+description = """For now author is not a valid key for instance.
+
+    $ taskgit
+    Task.__init__() got an unexpected keyword argument 'author'
+"""
+assignee = "Alex Telon"
+id = 26
 column = "todo"
 
