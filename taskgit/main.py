@@ -7,7 +7,7 @@ import toml
 
 import webbrowser
 
-from .gen import generate_board_html
+from taskgit.gen import generate_board_html
 
 
 def init():
