@@ -101,3 +101,10 @@ description = """For now author is not a valid key for instance.
 assignee = "Alex Telon"
 column = "todo"
 labels = ["bug"]
+
+[[task]]
+title = "Add support for filters"
+description = "I want some way to filter tasks on their labels and/or assignee."
+assignee = "Alex Telon"
+id = 28
+column = "ongoing"

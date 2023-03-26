@@ -45,6 +45,13 @@ body {
 
 .card .assignee {
   font-size: 12px;
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .card .priority {
