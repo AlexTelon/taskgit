@@ -9,11 +9,10 @@ body {
 }
 
 .column {
-  flex-grow: 1;
+  flex: 1 1 0; /* shorthand for flex-grow, flex-shrink, and flex-basis */
   background-color: #eee;
   padding: 10px;
   border-radius: 5px;
-  min-width: 200px;
   display: flex;
   flex-direction: column;
   gap: 10px;

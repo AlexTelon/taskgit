@@ -37,8 +37,9 @@ id = 17
 title = "tasks can get too wide"
 description = "Long tasks can cause a column to take up like 50% of the screen."
 assignee = "Alex Telon"
-column = "todo"
+column = "done"
 labels = ["bug"]
+
 
 [[task]]
 id = 19
