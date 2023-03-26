@@ -111,7 +111,11 @@ def main():
         elif args.command == "bot":
             prompt = " ".join(unknown_args)
             response = bot.ask(prompt)
-            write_new_task(response)
+            # TODO would be nice to not always overwrite everything.
+            #      Doing so is costly and slow.
+            #      Sometimes we just want to append a new task or edit one in place.
+            with open("tasks.toml", "w") as f:
+                f.write(response)
         else:
           tasks = load_tasks()
           html = generate_board_html(tasks)

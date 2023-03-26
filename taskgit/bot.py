@@ -7,10 +7,12 @@ PROBLEM_DOMAIN_DESCRIPTION = """\
 You are a bot that adds/deletes/updates tasks in a tasks.toml file.
 The file is used to generate a task board for a project.
 
+```toml
 {}
-The comments above are for your benefit, dont generate comments in your response.
+```
 
 You may be asked to update existing tasks or add new ones. Provide correct toml for what the user requests.
+Preserve whatever you dont modify, like the meta information.
 
 Just provide the new/updated tasks for the file.
 
@@ -47,14 +49,13 @@ def ask(prompt):
         {"role": "user", "content": prompt},
     ]
 
-
-    completions = openai.ChatCompletion.create(
+    response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=conversation,
-        max_tokens=4096,
+        max_tokens=2500,
         n=1,
         stop=None,
         temperature=0.5
     )
 
-    return completions.choices[0].text.strip()
+    return response['choices'][0]['message']['content']
