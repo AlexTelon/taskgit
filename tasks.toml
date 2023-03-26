@@ -109,3 +109,46 @@ description = "I want some way to filter tasks on their labels and/or assignee."
 assignee = "Alex Telon"
 id = 28
 column = "ongoing"
+labels = ["frontend"]
+
+[[task]]
+id = 29
+title = "Improve styling"
+assignee = "Alex Telon"
+column = "ongoing"
+labels = ["frontend"]
+
+
+[[task]]
+id = 30
+title = "Invisible scrollbars?"
+assignee = "Alex Telon"
+column = "ongoing"
+labels = ["frontend"]
+
+[[task]]
+id = 31
+title = "Try emojis in the title and elsewhere"
+assignee = "Alex Telon"
+column = "ongoing"
+labels = ["frontend"]
+
+[[task]]
+id = 32
+title = "Should clicking a task do something?"
+assignee = "Alex Telon"
+column = "todo"
+labels = ["feature"]
+
+[[task]]
+id = 33
+title = "taskgit askbot"
+description = """like `taskgit bot` but it makes no changes, is designed to for things like:
+
+    $ taskgit askbot "What is the status of task 1?"
+    $ taskgit askbot "Are there any tasks that seem like duplicates?"
+    $ taskgit askbot "Any tasks that seem to be missing important information?"
+"""
+assignee = "Alex Telon"
+column = "todo"
+labels = ["feature"]
