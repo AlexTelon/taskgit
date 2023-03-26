@@ -83,14 +83,6 @@ column = "todo"
 labels = ["bug"]
 
 [[task]]
-id = 24
-title = "Refactor generate_board_html"
-description = ""
-assignee = "Alex Telon"
-column = "ongoing"
-labels = ["feature"]
-
-[[task]]
 id = 25
 title = "taskgit modify <id> ..."
 description = ""
@@ -109,30 +101,3 @@ description = """For now author is not a valid key for instance.
 assignee = "Alex Telon"
 column = "todo"
 labels = ["bug"]
-
-[[task]]
-id = 27
-title = "Investigate using ai to add/modify tasks"
-description = """For this to work well we need very good tooling that visualizes what changed
-
-    taskgit update "Create a new task for each todo comment in the codebase"
-
-    taskgit update "For all new tasks assign them to me and put to backlog. Also add a 'code-debt' tag."
-
-    taskgit update "Every task assigned to X should be assigned to Y"
-
-    taskgit update "Remove all tasks in the done column"
-
-Some of these might be hard to do, the first one would require it to to know the codebase.
-But even if it's only limited to the tasks.toml file itself it should be able to do these other things.
-
-It could be used for individual tasks too. Like:
-
-    taskgit add "task for fixing the path bug on windows"
-
-But I'm not sure that is a killer feature.
-
-"""
-assignee = "Alex Telon"
-column = "ongoing"
-labels = ["idea"]
