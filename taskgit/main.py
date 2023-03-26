@@ -79,6 +79,10 @@ def write_webpage(html,):
     dest = Path(".site") / "style.css"
     shutil.copy(source, dest)
 
+    source = pkg_path / "script.js"
+    dest = Path(".site") / "script.js"
+    shutil.copy(source, dest)
+
 
 def open_webpage():
     webbrowser.open("file://" + os.path.realpath(".site/index.html"))

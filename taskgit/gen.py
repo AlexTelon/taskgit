@@ -127,9 +127,11 @@ def generate_board_html(tasks_data: str) -> str:
       <link rel="stylesheet" href="style.css">
     </head>
     <body>
+      <button id="clear-filter" style="display: none;">Clear filter</button>
       <div class="board">
         {column_html}
       </div>
+      <script src="script.js"></script>
     </body>
   </html>
   """

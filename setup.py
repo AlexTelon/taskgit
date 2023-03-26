@@ -8,7 +8,7 @@ setup(
     version="0.1",
     packages=find_packages(),
     package_data={
-        "taskgit": ["style.css"],
+        "taskgit": ["style.css", "script.js"],
     },
     entry_points={
         "console_scripts": [
