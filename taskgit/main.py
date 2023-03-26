@@ -38,6 +38,8 @@ def add(**kwargs):
     new_task = {k:v for k,v in kwargs.items() if v is not None}
     if 'id' not in new_task:
         new_task['id'] = int(tasks_data["task"][-1]["id"]) + 1
+    if 'title' not in new_task:
+        new_task['title'] = "Untitled"
     if 'column' not in new_task:
         new_task['column'] = 'todo'
 

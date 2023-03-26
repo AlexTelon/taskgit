@@ -99,9 +99,3 @@ description = """For now author is not a valid key for instance.
 assignee = "Alex Telon"
 id = 26
 column = "todo"
-
-[[task]]
-title = "taskgit add without --title gives err"
-description = "should add default I think"
-id = 27
-column = "todo"
