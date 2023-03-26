@@ -54,3 +54,19 @@ body {
 .card .due-date {
   font-size: 12px;
 }
+
+.labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.label {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}

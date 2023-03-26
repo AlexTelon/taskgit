@@ -1,5 +1,6 @@
 from collections import Counter
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass
@@ -11,9 +12,17 @@ class Task:
     priority: int = None
     due_date: str = None
     done_date: str = None
+    labels: List[str] = None
     column: str = "todo"
 
     def to_html(self):
+        labels_html = ""
+        if self.labels:
+            labels_html = '<div class="labels">'
+            for label in self.labels:
+                labels_html += f'<span class="label">{label}</span>'
+            labels_html += '</div>'
+
         return f"""
         <div class="card" data-id="{self.id}">
           <div class="title">#{self.id} {self.title}</div>
@@ -21,6 +30,7 @@ class Task:
           <div class="assignee">Assignee: {self.assignee}</div>
           {f'<div class="priority">Priority: {self.priority}</div>' if self.priority else ''}
           {f'<div class="due-date">Due: {self.due_date}</div>' if self.due_date else ''}
+          {labels_html}
         </div>
         """
 
