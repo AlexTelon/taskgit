@@ -42,14 +42,16 @@ def ask(prompt):
         toml_content = f.read()
     prompt = PROBLEM_DOMAIN_DESCRIPTION.format(toml_content, prompt)
 
-    # TODO try out text-davinci-edit-001 for edit tasks
-    # TODO how to handle removal of tasks?
-    # TODO try different models
+    conversation = [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": prompt},
+    ]
 
-    completions = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
-        max_tokens=2048,
+
+    completions = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=conversation,
+        max_tokens=4096,
         n=1,
         stop=None,
         temperature=0.5
