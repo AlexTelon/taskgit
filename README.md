@@ -252,4 +252,4 @@ taskgit add --title Improve err handling --description "Right now it does not gi
 
 ## Task.toml
 
-See the [task.toml](task.toml) file in this repository for an example.
+See the [tasks.toml](tasks.toml) file in this repository for an example.
