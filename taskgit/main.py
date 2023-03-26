@@ -7,7 +7,7 @@ import toml
 import webbrowser
 
 from taskgit.gen import generate_board_html
-
+import taskgit.bot as bot
 
 def init():
     # create a example task with named parameters
@@ -28,12 +28,23 @@ def init():
         with open("tasks.toml", "w") as f:
             toml.dump({"task": example_tasks}, f)
 
+def write_new_task(content):
+    print('Adding task:')
+    print(content.strip())
+
+    # not super efficient to read this multiple times but fine for now.
+    with open("tasks.toml", "r") as f:
+        ends_with_newline = f.read()[-1] == "\n"
+
+    with open("tasks.toml", "a") as f:
+        if not ends_with_newline:
+            content = "\n\n" + content
+        f.write(content)
+
 def add(**kwargs):
     """Add a line at the bottom of the taskgit.toml file with the correct format"""
     with open("tasks.toml", "r") as f:
-        content = f.read()
-        tasks_data = toml.loads(content)
-        ends_with_newline = content[-1] == "\n"
+        tasks_data = toml.load(f)
 
     new_task = {k:v for k,v in kwargs.items() if v is not None}
     if 'id' not in new_task:
@@ -47,12 +58,7 @@ def add(**kwargs):
 
     with open("tasks.toml", "a") as f:
         content = toml.dumps({"task": [new_task]})
-        print('Added task:')
-        print(content.strip())
-
-        if not ends_with_newline:
-            content = "\n\n" + content
-        f.write(content)
+        write_new_task(content)
 
 def load_tasks(filename="tasks.toml"):
     try:
@@ -86,6 +92,7 @@ def main():
 
     subparsers.add_parser("init", help="Create a new tasks.toml file")
     add_parser = subparsers.add_parser("add", help="Flexible cli for adding tasks. (write any and all --key value you wish)")
+    add_parser = subparsers.add_parser("bot", help="Ask openai to help you create/update tasks. (Freetext input)")
 
     args, unknown_args = parser.parse_known_args()
 
@@ -101,6 +108,10 @@ def main():
                 value = unknown_args[i+1] if i+1 < len(unknown_args) else ""
                 kwargs[key] = value
             add(**kwargs)
+        elif args.command == "bot":
+            prompt = " ".join(unknown_args)
+            response = bot.ask(prompt)
+            write_new_task(response)
         else:
           tasks = load_tasks()
           html = generate_board_html(tasks)
