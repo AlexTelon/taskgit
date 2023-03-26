@@ -2,7 +2,6 @@
 order = ['todo', 'ongoing', 'done']
 hidden = ['backlog']
 
-
 [[task]]
 id = 9
 title = "Generate github pages with github actions"
@@ -84,20 +83,23 @@ column = "todo"
 labels = ["bug"]
 
 [[task]]
-title = "Refactor generate_board_html"
-assignee = "Alex Telon"
 id = 24
+title = "Refactor generate_board_html"
+description = ""
+assignee = "Alex Telon"
 column = "ongoing"
 labels = ["feature"]
 
 [[task]]
-title = "taskgit modify <id> ..."
-assignee = "Alex Telon"
 id = 25
+title = "taskgit modify <id> ..."
+description = ""
+assignee = "Alex Telon"
 column = "todo"
 labels = ["feature"]
 
 [[task]]
+id = 26
 title = "Nicer errors for unknown keys in toml"
 description = """For now author is not a valid key for instance.
 
@@ -105,11 +107,11 @@ description = """For now author is not a valid key for instance.
     Task.__init__() got an unexpected keyword argument 'author'
 """
 assignee = "Alex Telon"
-id = 26
 column = "todo"
 labels = ["bug"]
 
 [[task]]
+id = 27
 title = "Investigate using ai to add/modify tasks"
 description = """For this to work well we need very good tooling that visualizes what changed
 
@@ -131,6 +133,6 @@ It could be used for individual tasks too. Like:
 But I'm not sure that is a killer feature.
 
 """
-id = 27
+assignee = "Alex Telon"
 column = "ongoing"
 labels = ["idea"]
