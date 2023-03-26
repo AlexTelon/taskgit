@@ -1,6 +1,5 @@
 import argparse
 import os
-import pathlib
 from pathlib import Path
 import shutil
 import toml
@@ -32,7 +31,9 @@ def init():
 def add(**kwargs):
     """Add a line at the bottom of the taskgit.toml file with the correct format"""
     with open("tasks.toml", "r") as f:
-        tasks_data = toml.load(f)
+        content = f.read()
+        tasks_data = toml.loads(content)
+        ends_with_newline = content[-1] == "\n"
 
     new_task = {k:v for k,v in kwargs.items() if v is not None}
     if 'id' not in new_task:
@@ -46,6 +47,9 @@ def add(**kwargs):
         content = toml.dumps({"task": [new_task]})
         print('Added task:')
         print(content.strip())
+
+        if not ends_with_newline:
+            content = "\n\n" + content
         f.write(content)
 
 def load_tasks(filename="tasks.toml"):
