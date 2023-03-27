@@ -23,7 +23,7 @@ But you dont have to use them. Integrate your own or use github copilot when mod
 
 Here is an example of using the `taskgit bot` cli command.
 
-```git
+```diff
 # Let "chatgpt" modify your board with free text requests!
 $ taskgit bot assign all tasks to Dondald Duck instead
 # Using git diff to show the changes made
@@ -57,7 +57,7 @@ $ git diff tasks.toml
 ...
 ```
 
-```git
+```diff
 $ taskgit bot add labels like ['bug', 'feature', 'idea'] to tasks. Also fix spelling errors
 
 $ git diff tasks.toml
