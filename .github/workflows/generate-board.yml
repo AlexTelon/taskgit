@@ -12,17 +12,21 @@ jobs:
     - uses: actions/setup-python@v2
       with:
         python-version: '3.11'
+
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install taskgit
+
     - name: Generate board HTML
       run: |
-        ls -la .
-        ls -la taskgit/
-        python taskgit/generator.py
+        taskgit
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./site
+        publish_dir: ./.site
