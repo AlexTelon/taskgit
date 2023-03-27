@@ -15,10 +15,38 @@ question: {}
 new contents of tasks.toml after your changes:
 """
 
-def ask(prompt):
+def update_tasks(prompt):
     with open("tasks.toml", "r") as f:
         toml_content = f.read()
     prompt = PROBLEM_DOMAIN_DESCRIPTION.format(toml_content, prompt)
+
+    conversation = [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": prompt},
+    ]
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=conversation,
+        max_tokens=2500,
+        n=1,
+        stop=None,
+        temperature=0.5
+    )
+
+    return response['choices'][0]['message']['content']
+
+
+def ask(prompt):
+    with open("tasks.toml", "r") as f:
+        toml_content = f.read()
+
+    prompt = f"""\
+Context:
+
+{toml_content}
+question: {prompt}
+"""
 
     conversation = [
         {"role": "system", "content": "You are a helpful assistant."},

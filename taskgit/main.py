@@ -97,6 +97,7 @@ def main():
     subparsers.add_parser("init", help="Create a new tasks.toml file")
     add_parser = subparsers.add_parser("add", help="Flexible cli for adding tasks. (write any and all --key value you wish)")
     add_parser = subparsers.add_parser("bot", help="Ask openai to help you create/update tasks. (Freetext input)")
+    add_parser = subparsers.add_parser("askbot", help="Ask openai to help you create/update tasks. (Freetext input)")
 
     args, unknown_args = parser.parse_known_args()
 
@@ -114,12 +115,15 @@ def main():
             add(**kwargs)
         elif args.command == "bot":
             prompt = " ".join(unknown_args)
-            response = bot.ask(prompt)
+            response = bot.update_tasks(prompt)
             # TODO would be nice to not always overwrite everything.
             #      Doing so is costly and slow.
             #      Sometimes we just want to append a new task or edit one in place.
             with open("tasks.toml", "w") as f:
                 f.write(response)
+        elif args.command == "askbot":
+            prompt = " ".join(unknown_args)
+            print(bot.ask(prompt))
         else:
           tasks = load_tasks()
           html = generate_board_html(tasks)
