@@ -152,3 +152,13 @@ description = """like `taskgit bot` but it makes no changes, is designed to for 
 assignee = "Alex Telon"
 column = "todo"
 labels = ["feature"]
+
+[[task]]
+title = "openai key only loads from current dir"
+id = 34
+column = "todo"
+
+[[task]]
+title = "Only check openai key if using bot"
+id = 35
+column = "done"

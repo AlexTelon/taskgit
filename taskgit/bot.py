@@ -1,7 +1,9 @@
 import openai
 
-with open('.openai_key.secret', 'r') as f:
-    openai.api_key = f.read().strip()
+def load_openai_key():
+    if not openai.api_key:
+        with open('.openai_key.secret', 'r') as f:
+            openai.api_key = f.read().strip()
 
 PROBLEM_DOMAIN_DESCRIPTION = """\
 You are a bot that given some instruction updates a tasks.toml file.
@@ -16,6 +18,7 @@ new contents of tasks.toml after your changes:
 """
 
 def update_tasks(prompt):
+    load_openai_key()
     with open("tasks.toml", "r") as f:
         toml_content = f.read()
     prompt = PROBLEM_DOMAIN_DESCRIPTION.format(toml_content, prompt)
@@ -38,6 +41,7 @@ def update_tasks(prompt):
 
 
 def ask(prompt):
+    load_openai_key()
     with open("tasks.toml", "r") as f:
         toml_content = f.read()
 
