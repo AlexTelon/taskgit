@@ -1,3 +1,7 @@
+html {
+  height: 100%;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   background: linear-gradient(to bottom, #6a11cb, #2575fc);
