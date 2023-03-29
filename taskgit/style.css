@@ -23,6 +23,7 @@ body {
   gap: 10px;
   overflow-y: auto;
   max-height: calc(100vh - 60px);
+  align-self:first baseline;
 }
 
 .column h2 {
