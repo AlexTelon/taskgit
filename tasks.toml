@@ -143,7 +143,7 @@ description = """like `taskgit bot` but it makes no changes, is designed to for 
     $ taskgit askbot "Any tasks that seem to be missing important information?"
 """
 assignee = "Alex Telon"
-column = "todo"
+column = "done"
 labels = ["feature"]
 
 [[task]]
