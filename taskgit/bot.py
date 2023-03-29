@@ -1,9 +1,11 @@
 import openai
 
+
 def load_openai_key():
     if not openai.api_key:
-        with open('.openai_key.secret', 'r') as f:
+        with open(".openai_key.secret", "r") as f:
             openai.api_key = f.read().strip()
+
 
 PROBLEM_DOMAIN_DESCRIPTION = """\
 You are a bot that given some instruction updates a tasks.toml file.
@@ -16,6 +18,7 @@ You may be asked to update existing tasks or add new ones. Provide correct toml 
 question: {}
 new contents of tasks.toml after your changes:
 """
+
 
 def update_tasks(prompt):
     load_openai_key()
@@ -34,10 +37,10 @@ def update_tasks(prompt):
         max_tokens=2500,
         n=1,
         stop=None,
-        temperature=0.5
+        temperature=0.5,
     )
 
-    return response['choices'][0]['message']['content']
+    return response["choices"][0]["message"]["content"]
 
 
 def ask(prompt):
@@ -63,7 +66,7 @@ question: {prompt}
         max_tokens=2500,
         n=1,
         stop=None,
-        temperature=0.5
+        temperature=0.5,
     )
 
-    return response['choices'][0]['message']['content']
+    return response["choices"][0]["message"]["content"]

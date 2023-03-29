@@ -23,7 +23,7 @@ class Task:
             labels_html = '<div class="labels">'
             for label in self.labels:
                 labels_html += f'<span class="label">{label}</span>'
-            labels_html += '</div>'
+            labels_html += "</div>"
 
         return f"""
         <div class="card" data-id="{self.id}">
@@ -36,12 +36,14 @@ class Task:
         </div>
         """
 
+
 def create_tasks(tasks_data: str) -> list[Task]:
     if "task" not in tasks_data:
         raise KnownException("No tasks found in tasks.toml.")
 
     # Create a list of Task instances from the tasks data
     return [Task(**task_dict) for task_dict in tasks_data["task"]]
+
 
 def parse_meta(tasks_data: str) -> dict:
     # Get the column order. If not specified, use the default order.
@@ -50,6 +52,7 @@ def parse_meta(tasks_data: str) -> dict:
     hidden_columns = meta.get("hidden", [])
 
     return {"order": column_order, "hidden": hidden_columns}
+
 
 def validate_ids(tasks: list[Task]):
     # check tasks.id is unique.
@@ -61,10 +64,11 @@ def validate_ids(tasks: list[Task]):
         raise KnownException(f"Duplicate task ids: {duplicates}")
     return tasks
 
+
 def create_columns(tasks: list[Task], tasks_data: str) -> dict[str, list]:
     meta = parse_meta(tasks_data)
-    hidden_columns = meta['hidden']
-    column_order = meta['order']
+    hidden_columns = meta["hidden"]
+    column_order = meta["order"]
 
     # Get all unique columns from the tasks to a dict
     columns = {task.column: [] for task in tasks if task.column not in hidden_columns}
@@ -85,6 +89,7 @@ def create_columns(tasks: list[Task], tasks_data: str) -> dict[str, list]:
         )
     return columns
 
+
 def sort_tasks(tasks: list[Task], columns: dict[str, list]) -> dict[str, list[Task]]:
     for col in columns:
         _tasks = [task for task in tasks if task.column == col]
@@ -94,7 +99,7 @@ def sort_tasks(tasks: list[Task], columns: dict[str, list]) -> dict[str, list[Ta
         else:
             # Sort the done tasks by date
             columns[col] = sorted(_tasks, key=lambda task: task.done_date or "", reverse=True)
-      
+
 
 def generate_board_html(tasks_data: str) -> str:
     """Generate the HTML for the board from the tasks data and returns a html string."""
