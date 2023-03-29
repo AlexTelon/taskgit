@@ -2,6 +2,7 @@ import argparse
 import os
 from pathlib import Path
 import shutil
+import traceback
 import toml
 
 import webbrowser
@@ -131,6 +132,7 @@ def main():
           open_webpage()
 
     except Exception as e:
+        traceback.print_exc()
         quit(e)
 
 

@@ -76,14 +76,6 @@ column = "todo"
 labels = ["idea"]
 
 [[task]]
-id = 23
-title = "Improve error handling"
-description = "Right now it does not give line numbers and context for unexpected errors"
-assignee = "Alex Telon"
-column = "todo"
-labels = ["bug"]
-
-[[task]]
 id = 25
 title = "taskgit modify <id> ..."
 description = ""
