@@ -1,0 +1,200 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Task Board</title>
+      <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <button id="clear-filter" style="display: none;">Clear filter</button>
+      <div class="board">
+        
+      <div class="column todo">
+        <h2>Todo</h2>
+        
+        <div class="card" data-id="15">
+          <div class="title">#15 Figure out a nicer close process</div>
+          <div class="description">Should removing a task be considered closing it?
+
+In case you don't want to update the text as you close it you could just remove it in a commit.
+
+But in case you want to update the text before you remove then right now you would first commit the
+change and then commit the removal..
+
+Also history.py should be updated to reflect that if the task has been removed it should always be closed?
+But what of other types of removal like removed, deleted?
+
+I want to keep this simple yet flexible. So either make this configurable or make the code small and simple
+so that others can modify the code.
+
+Maybe not have a done/close column at all? We can of course get it from history. But maybe it should only be visible in that view?
+</div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">idea</span></div>
+        </div>
+        
+        <div class="card" data-id="19">
+          <div class="title">#19 Detect if historic ids are reused and err</div>
+          <div class="description">If one closes the last id from tasks.toml it is easy to forget that it has been used already. We should detect that and give an err.
+
+We need to store this information somewhere. I don't want to crawl all of git history to figure this out.
+
+git merges are gonna be a problem...
+</div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">bug</span></div>
+        </div>
+        
+        <div class="card" data-id="21">
+          <div class="title">#21 Rethink format and what this really is</div>
+          <div class="description">I mean this form factor could mean we try things a little differently? Do we really need ids now that it is in git?
+
+I don't know, but have a feeling there are interesting things here to explore.
+</div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">idea</span></div>
+        </div>
+        
+        <div class="card" data-id="22">
+          <div class="title">#22 How to solve potential git merge conflicts with ids</div>
+          <div class="description">Should we skip Ids? Or should we have them but they are guids or something instead?
+
+But editing a file by hand would be harder. You would kind of have to use something like `taskgit add "title"` or `taskgit new` to create a template task with a guid to start with?</div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">idea</span></div>
+        </div>
+        
+        <div class="card" data-id="25">
+          <div class="title">#25 taskgit modify <id> ...</div>
+          <div class="description"></div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">feature</span></div>
+        </div>
+        
+        <div class="card" data-id="26">
+          <div class="title">#26 Nicer errors for unknown keys in toml</div>
+          <div class="description">For now author is not a valid key for instance.
+
+    $ taskgit
+    Task.__init__() got an unexpected keyword argument 'author'
+</div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">bug</span></div>
+        </div>
+        
+        <div class="card" data-id="32">
+          <div class="title">#32 Should clicking a task do something?</div>
+          <div class="description"></div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">feature</span></div>
+        </div>
+        
+        <div class="card" data-id="34">
+          <div class="title">#34 openai key only loads from current dir</div>
+          <div class="description"></div>
+          <div class="assignee">Assignee: </div>
+          
+          
+          
+        </div>
+        
+      </div>
+      
+      <div class="column ongoing">
+        <h2>Ongoing</h2>
+        
+        <div class="card" data-id="28">
+          <div class="title">#28 Add support for filters</div>
+          <div class="description">I want some way to filter tasks on their labels and/or assignee.</div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">frontend</span></div>
+        </div>
+        
+        <div class="card" data-id="29">
+          <div class="title">#29 Improve styling</div>
+          <div class="description"></div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">frontend</span></div>
+        </div>
+        
+        <div class="card" data-id="30">
+          <div class="title">#30 Invisible scrollbars?</div>
+          <div class="description"></div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">frontend</span></div>
+        </div>
+        
+      </div>
+      
+      <div class="column done">
+        <h2>Done</h2>
+        
+        <div class="card" data-id="17">
+          <div class="title">#17 tasks can get too wide</div>
+          <div class="description">Long tasks can cause a column to take up like 50% of the screen.</div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">bug</span></div>
+        </div>
+        
+        <div class="card" data-id="31">
+          <div class="title">#31 Try emojis in the title and elsewhere 📋</div>
+          <div class="description">😀 😃 😄 😁 😆 😅 😂 🤣 🥲 🥹 ☺️ 😊 😇 🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😋 😛 😝 😜 🤪 🤨 🧐 🤓 😎 🥸 🤩 🥳 😏 😒 😞 😔 😟 😕 🙁 ☹️ 😣 😖 😫 😩 🥺 😢 😭 😮‍💨 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 😥 😓 🫣 🤗 🫡 🤔 🫢 🤭 🤫 🤥 😶 😶‍🌫️ 😐 😑 😬 🫨 🫠 🙄 😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 😵‍💫 🫥 🤐 🥴 🤢 🤮 🤧 😷 🤒 🤕 🤑 🤠 😈 👿 👹 👺 🤡 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 😺 😸 😹 😻 😼 😽 🙀 😿 😾</div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">frontend</span></div>
+        </div>
+        
+        <div class="card" data-id="33">
+          <div class="title">#33 taskgit askbot</div>
+          <div class="description">like `taskgit bot` but it makes no changes, is designed to for things like:
+
+    $ taskgit askbot "What is the status of task 1?"
+    $ taskgit askbot "Are there any tasks that seem like duplicates?"
+    $ taskgit askbot "Any tasks that seem to be missing important information?"
+</div>
+          <div class="assignee">Assignee: Alex Telon</div>
+          
+          
+          <div class="labels"><span class="label">feature</span></div>
+        </div>
+        
+        <div class="card" data-id="35">
+          <div class="title">#35 Only check openai key if using bot</div>
+          <div class="description"></div>
+          <div class="assignee">Assignee: </div>
+          
+          
+          
+        </div>
+        
+      </div>
+      
+      </div>
+      <script src="script.js"></script>
+    </body>
+  </html>
+  
