@@ -7,6 +7,7 @@ import toml
 
 import webbrowser
 
+from taskgit.exceptions import KnownException
 from taskgit.gen import generate_board_html
 import taskgit.bot as bot
 
@@ -24,7 +25,7 @@ def init():
     ]
 
     if os.path.exists("tasks.toml"):
-        raise Exception("tasks.toml file already exists!")
+        raise KnownException("tasks.toml file already exists!")
     else:
         with open("tasks.toml", "w", encoding="utf-8") as f:
             toml.dump({"task": example_tasks}, f)
@@ -66,7 +67,7 @@ def load_tasks(filename="tasks.toml"):
         with open(filename, "r", encoding="utf-8") as f:
             return toml.load(f)
     except FileNotFoundError:
-        raise Exception(
+        raise KnownException(
             'tasks.toml file not found. Run "taskgit init" to create a new tasks.toml file.'
         )
 
@@ -131,9 +132,11 @@ def main():
           write_webpage(html)
           open_webpage()
 
-    except Exception as e:
-        traceback.print_exc()
+    except KnownException as e:
         quit(e)
+    except Exception:
+        traceback.print_exc()
+        exit()
 
 
 if __name__ == "__main__":

@@ -2,6 +2,8 @@ from collections import Counter
 from dataclasses import dataclass
 from typing import List
 
+from taskgit.exceptions import KnownException
+
 
 @dataclass
 class Task:
@@ -36,7 +38,7 @@ class Task:
 
 def create_tasks(tasks_data: str) -> list[Task]:
     if "task" not in tasks_data:
-        raise Exception("No tasks found in tasks.toml.")
+        raise KnownException("No tasks found in tasks.toml.")
 
     # Create a list of Task instances from the tasks data
     return [Task(**task_dict) for task_dict in tasks_data["task"]]
@@ -56,7 +58,7 @@ def validate_ids(tasks: list[Task]):
             id for id, count in Counter([task.id for task in tasks]).items() if count > 1
         ]
     ):
-        raise Exception(f"Duplicate task ids: {duplicates}")
+        raise KnownException(f"Duplicate task ids: {duplicates}")
     return tasks
 
 def create_columns(tasks: list[Task], tasks_data: str) -> dict[str, list]:
@@ -78,7 +80,7 @@ def create_columns(tasks: list[Task], tasks_data: str) -> dict[str, list]:
 {fixed}
 {' ' * (len(current)+1) + '^' * (len(fixed) - len(current) - 1)}
       """
-        raise Exception(
+        raise KnownException(
             f"columns {list(missing_columns)} used but missing in column_order:\n" + hint
         )
     return columns
