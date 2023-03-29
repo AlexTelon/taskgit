@@ -25,7 +25,7 @@ def init():
     if os.path.exists("tasks.toml"):
         raise Exception("tasks.toml file already exists!")
     else:
-        with open("tasks.toml", "w") as f:
+        with open("tasks.toml", "w", encoding="utf-8") as f:
             toml.dump({"task": example_tasks}, f)
 
 def write_new_task(content):
@@ -33,17 +33,17 @@ def write_new_task(content):
     print(content.strip())
 
     # not super efficient to read this multiple times but fine for now.
-    with open("tasks.toml", "r") as f:
+    with open("tasks.toml", "r", encoding="utf-8") as f:
         ends_with_newline = f.read()[-1] == "\n"
 
-    with open("tasks.toml", "a") as f:
+    with open("tasks.toml", "a", encoding="utf-8") as f:
         if not ends_with_newline:
             content = "\n\n" + content
         f.write(content)
 
 def add(**kwargs):
     """Add a line at the bottom of the taskgit.toml file with the correct format"""
-    with open("tasks.toml", "r") as f:
+    with open("tasks.toml", "r", encoding="utf-8") as f:
         tasks_data = toml.load(f)
 
     new_task = {k:v for k,v in kwargs.items() if v is not None}
@@ -56,13 +56,13 @@ def add(**kwargs):
 
     tasks_data["task"].append(new_task)
 
-    with open("tasks.toml", "a") as f:
+    with open("tasks.toml", "a", encoding="utf-8") as f:
         content = toml.dumps({"task": [new_task]})
         write_new_task(content)
 
 def load_tasks(filename="tasks.toml"):
     try:
-        with open(filename, "r") as f:
+        with open(filename, "r", encoding="utf-8") as f:
             return toml.load(f)
     except FileNotFoundError:
         raise Exception(
@@ -71,7 +71,7 @@ def load_tasks(filename="tasks.toml"):
 
 def write_webpage(html,):
     os.makedirs(".site", exist_ok=True)
-    with open(".site/index.html", "w") as f:
+    with open(".site/index.html", "w", encoding="utf-8") as f:
         f.write(html)
 
     pkg_path = Path(__file__).resolve().parent
@@ -119,7 +119,7 @@ def main():
             # TODO would be nice to not always overwrite everything.
             #      Doing so is costly and slow.
             #      Sometimes we just want to append a new task or edit one in place.
-            with open("tasks.toml", "w") as f:
+            with open("tasks.toml", "w", encoding="utf-8") as f:
                 f.write(response)
         elif args.command == "askbot":
             prompt = " ".join(unknown_args)

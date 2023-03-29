@@ -19,7 +19,7 @@ new contents of tasks.toml after your changes:
 
 def update_tasks(prompt):
     load_openai_key()
-    with open("tasks.toml", "r") as f:
+    with open("tasks.toml", "r", encoding="utf-8") as f:
         toml_content = f.read()
     prompt = PROBLEM_DOMAIN_DESCRIPTION.format(toml_content, prompt)
 
@@ -42,7 +42,7 @@ def update_tasks(prompt):
 
 def ask(prompt):
     load_openai_key()
-    with open("tasks.toml", "r") as f:
+    with open("tasks.toml", "r", encoding="utf-8") as f:
         toml_content = f.read()
 
     prompt = f"""\
