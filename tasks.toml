@@ -155,3 +155,23 @@ column = "todo"
 title = "Only check openai key if using bot"
 id = 35
 column = "done"
+
+[[task]]
+title = "Start using git history when generating page"
+description = """I have not skipped that part for a long time now. I should start exploring that now.
+
+Could we have a toggle to show closed tasks from history for instance.
+Could we link task to commits based on #<id> tags or just by seeing that the commit edited the task?
+Also related to #19
+"""
+id = 36
+column = "todo"
+
+
+[[task]]
+id = 37
+title = "Make tasks expandable"
+description = "Hide long text under ... and also hide other information for a task that is only made visible by clicking on it (which expands it)"
+column = "todo"
+
+
