@@ -77,22 +77,20 @@ def load_tasks(filename="tasks.toml"):
 
 
 def write_webpage(html):
-    os.makedirs(".site", exist_ok=True)
-    with open(".site/index.html", "w", encoding="utf-8") as f:
+    site_path = Path(".taskgit") / Path("site")
+    site_path.mkdir(parents=True, exist_ok=True)
+
+    html_path = site_path / "index.html"
+    with html_path.open(mode="w", encoding="utf-8") as f:
         f.write(html)
 
     pkg_path = Path(__file__).resolve().parent
-    source = pkg_path / "style.css"
-    dest = Path(".site") / "style.css"
-    shutil.copy(source, dest)
-
-    source = pkg_path / "script.js"
-    dest = Path(".site") / "script.js"
-    shutil.copy(source, dest)
+    shutil.copy(pkg_path / "style.css", site_path / "style.css")
+    shutil.copy(pkg_path / "script.js", site_path / "script.js")
 
 
 def open_webpage():
-    webbrowser.open("file://" + os.path.realpath(".site/index.html"))
+    webbrowser.open("file://" + os.path.realpath(".taskgit/site/index.html"))
 
 
 def main():
