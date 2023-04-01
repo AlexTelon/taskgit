@@ -175,3 +175,30 @@ description = "Hide long text under ... and also hide other information for a ta
 column = "todo"
 
 
+[[task]]
+title = "pre-commit hook to ask gpt if all changes are appropriated accounted for with the comment + tag information"
+id = 38
+column = "todo"
+
+[[task]]
+title = "task id's are always toward a specific branch"
+id = 39
+description = "That way we avoid #22 with merging."
+column = "todo"
+
+[[task]]
+title = "Large scale goals, precommit ai check if work is in that direction"
+id = 40
+description = """Not that we prevent work not fully aligned with the goal/mission, but that we remind the user to be focused on the goals."""
+column = "todo"
+
+[[task]]
+title = "Markdown support in task description"
+id = 41
+description = """Im mostly thinking about links (to file or url) but maybe other stuff too!
+
+Links to files [tasks.toml](tasks.toml)
+
+"""
+column = "ongoing"
+

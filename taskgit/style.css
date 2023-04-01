@@ -22,6 +22,7 @@ body {
   flex-direction: column;
   gap: 10px;
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: calc(100vh - 60px);
   align-self:first baseline;
 }

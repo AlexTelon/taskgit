@@ -1,3 +1,5 @@
 # python 3.11 has tomllib built in but its only for reading, not writing.
 toml
 openai
+
+markdown

@@ -1,9 +1,10 @@
 from collections import Counter
 from dataclasses import dataclass
+import re
 from typing import List
 
 from taskgit.exceptions import KnownException
-
+import markdown
 
 @dataclass
 class Task:
@@ -25,10 +26,21 @@ class Task:
                 labels_html += f'<span class="label">{label}</span>'
             labels_html += "</div>"
 
+        try:
+            # Ensure that file links are relative to the root of the repo (and not .taskgit/site).
+            description = re.sub(
+                r"\[(.+)\]\((.+)\)",
+                r"[\1](../../\2)",
+                self.description,
+            )
+            description_html = markdown.markdown(description)
+        except:
+            description_html = self.description
+
         return f"""
         <div class="card" data-id="{self.id}">
           <div class="title">#{self.id} {self.title}</div>
-          <div class="description">{self.description}</div>
+          <div class="description">{description_html}</div>
           <div class="assignee">Assignee: {self.assignee}</div>
           {f'<div class="priority">Priority: {self.priority}</div>' if self.priority else ''}
           {f'<div class="due-date">Due: {self.due_date}</div>' if self.due_date else ''}
