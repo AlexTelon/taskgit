@@ -23,7 +23,7 @@ class Task:
         if self.labels:
             labels_html = '<div class="labels">'
             for label in self.labels:
-                labels_html += f'<span class="label">{label}</span>'
+                labels_html += f'<span class="meta-item label">{label}</span>'
             labels_html += "</div>"
 
         try:
@@ -41,10 +41,12 @@ class Task:
         <div class="card" data-id="{self.id}">
           <div class="title"><span class="highlight">#{self.id}</span> {self.title}</div>
           <div class="description">{description_html}</div>
-          <div class="assignee">Assignee: {self.assignee}</div>
-          {f'<div class="priority">Priority: {self.priority}</div>' if self.priority else ''}
-          {f'<div class="due-date">Due: {self.due_date}</div>' if self.due_date else ''}
-          {labels_html}
+          <div class="meta">
+            <div class="meta-item assignee">Assignee: {self.assignee}</div>
+            {f'<div class="meta-item priority">Priority: {self.priority}</div>' if self.priority else ''}
+            {f'<div class="meta-item due-date">Due: {self.due_date}</div>' if self.due_date else ''}
+            {labels_html}
+          </div>
         </div>
         """
 
