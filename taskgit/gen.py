@@ -21,7 +21,7 @@ class Task:
     def to_html(self):
         labels_html = ""
         if self.labels:
-            labels_html = '<div class="meta-wrapper"><span>Labels:</span> '
+            labels_html = '<div class="row"><span>Labels:</span> '
             for label in self.labels:
                 labels_html += f'<span class="meta-item label">{label}</span>'
             labels_html += "</div>"
@@ -42,9 +42,9 @@ class Task:
           <div class="title"><span class="highlight">#{self.id}</span> {self.title}</div>
           <div class="description">{description_html}</div>
           <div class="meta">
-            <div class="meta-wrapper"><span>Assignee:</span> <div class="meta-item assignee">{self.assignee}</div></div>
-            {f'<div class="meta-wrapper"><span>Priority:</span> <div class="meta-item priority">{self.priority}</div></div>' if self.priority else ''}
-            {f'<div class="meta-wrapper"><span>Due:</span> <div class="meta-item due-date">{self.due_date}</div></div>' if self.due_date else ''}
+            <div class="row"><span>Assignee:</span> <div class="meta-item assignee">{self.assignee}</div></div>
+            {f'<div class="row"><span>Priority:</span> <div class="meta-item priority">{self.priority}</div></div>' if self.priority else ''}
+            {f'<div class="row"><span>Due:</span> <div class="meta-item due-date">{self.due_date}</div></div>' if self.due_date else ''}
             {labels_html}
           </div>
         </div>
@@ -151,7 +151,7 @@ def generate_board_html(tasks_data: str) -> str:
       <link rel="stylesheet" href="style.css">
     </head>
     <body>
-      <div class="meta-wrapper">
+      <div class="row">
         <button id="clear-filter" style="display: none;">Clear filter</button>
         <div id="current-filters"></div>
       </div>

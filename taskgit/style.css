@@ -71,7 +71,7 @@ body {
   align-items: flex-start;
 }
 
-.meta-wrapper {
+.row {
   display: flex;
   align-items: center;
   gap: 5px;
