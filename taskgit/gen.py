@@ -39,7 +39,7 @@ class Task:
 
         return f"""
         <div class="card" data-id="{self.id}">
-          <div class="title">#{self.id} {self.title}</div>
+          <div class="title"><span class="highlight">#{self.id}</span> {self.title}</div>
           <div class="description">{description_html}</div>
           <div class="assignee">Assignee: {self.assignee}</div>
           {f'<div class="priority">Priority: {self.priority}</div>' if self.priority else ''}
