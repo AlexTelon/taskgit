@@ -13,66 +13,78 @@ for (const label of labels) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    var labels = document.querySelectorAll('.label');
-    labels.forEach(function(label) {
-      label.addEventListener('click', function(event) {
-        filterTasksByLabel(event.target.textContent);
-      });
+  const metaItems = document.querySelectorAll(".meta-item");
+  metaItems.forEach((metaItem) => {
+    metaItem.addEventListener("click", function (event) {
+      const itemKey = event.target.classList[1];
+      itemValue = event.target.textContent
+      if (itemValue.includes(":")) {
+        itemValue = itemValue.split(": ")[1];
+      }
+      if (itemKey && itemValue) {
+        updateFilter(itemKey, itemValue);
+      }
     });
-  
-    var assignees = document.querySelectorAll('.assignee');
-    assignees.forEach(function(assignee) {
-      assignee.addEventListener('click', function(event) {
-        filterTasksByAssignee(event.target.textContent.replace('Assignee: ', ''));
-      });
-    });
-  
+
     var clearFilterButton = document.getElementById("clear-filter");
     clearFilterButton.addEventListener("click", function () {
       clearFilter();
     });
   });
-  
-  function filterTasksByLabel(labelText) {
-    var cards = document.querySelectorAll(".card");
-    var clearFilterButton = document.getElementById("clear-filter");
-    clearFilterButton.style.display = "block";
-    cards.forEach(function(card) {
-      var cardLabels = card.querySelectorAll('.label');
-      var hasLabel = false;
-      cardLabels.forEach(function(cardLabel) {
-        if (cardLabel.textContent === labelText) {
-          hasLabel = true;
-        }
-      });
-      if (hasLabel) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
-    });
+});
+
+filterState = {};
+
+function updateFilter(key, value) {
+  if (filterState[key] === value) {
+    delete filterState[key];
+  } else {
+    filterState[key] = value;
+  }
+  applyFilter();
 }
 
-function filterTasksByAssignee(assigneeText) {
-    var cards = document.querySelectorAll(".card");
-    var clearFilterButton = document.getElementById("clear-filter");
-    clearFilterButton.style.display = "block";
-    cards.forEach(function(card) {
-        var cardAssignee = card.querySelector('.assignee');
-        if (cardAssignee.textContent.replace('Assignee: ', '') === assigneeText) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
+function applyFilter() {
+  const clearFilterButton = document.getElementById("clear-filter");
+  clearFilterButton.style.display = "block";
+
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    let shouldDisplay = true;
+
+    for (const [key, value] of Object.entries(filterState)) {
+      const cardMetaItem = card.querySelector(`.meta-item.${key}`);
+      const cardMetaItemValue = cardMetaItem?.textContent
+      if (!cardMetaItem || cardMetaItemValue !== value) {
+        shouldDisplay = false;
+        break;
+      }
+    console.log(card, shouldDisplay);
+    }
+
+    card.style.display = shouldDisplay ? "block" : "none";
+  });
+
+  const currentFilters = document.getElementById("current-filters");
+  currentFilters.textContent = Object.entries(filterState)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(", ");
 }
+
 
 function clearFilter() {
-    var cards = document.querySelectorAll(".card");
-    cards.forEach(function (card) {
-        card.style.display = "block";
-    });
+  console.log('clearFilter', filterState);
+  filterState = {}; // Add this line to reset the filterState
 
-    var clearFilterButton = document.getElementById("clear-filter");
-    clearFilterButton.style.display = "none";
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    console.log('clearFilter');
+    card.style.display = "block";
+  });
+
+  const clearFilterButton = document.getElementById("clear-filter");
+  clearFilterButton.style.display = "none";
+  
+  const currentFilters = document.getElementById("current-filters");
+  currentFilters.textContent = "";
 }

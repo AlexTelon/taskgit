@@ -21,7 +21,7 @@ class Task:
     def to_html(self):
         labels_html = ""
         if self.labels:
-            labels_html = '<div class="labels">'
+            labels_html = '<div class="meta-wrapper"><span>Labels:</span> '
             for label in self.labels:
                 labels_html += f'<span class="meta-item label">{label}</span>'
             labels_html += "</div>"
@@ -42,13 +42,16 @@ class Task:
           <div class="title"><span class="highlight">#{self.id}</span> {self.title}</div>
           <div class="description">{description_html}</div>
           <div class="meta">
-            <div class="meta-item assignee">Assignee: {self.assignee}</div>
-            {f'<div class="meta-item priority">Priority: {self.priority}</div>' if self.priority else ''}
-            {f'<div class="meta-item due-date">Due: {self.due_date}</div>' if self.due_date else ''}
+            <div class="meta-wrapper"><span>Assignee:</span> <div class="meta-item assignee">{self.assignee}</div></div>
+            {f'<div class="meta-wrapper"><span>Priority:</span> <div class="meta-item priority">{self.priority}</div></div>' if self.priority else ''}
+            {f'<div class="meta-wrapper"><span>Due:</span> <div class="meta-item due-date">{self.due_date}</div></div>' if self.due_date else ''}
             {labels_html}
           </div>
         </div>
         """
+
+
+
 
 
 def create_tasks(tasks_data: str) -> list[Task]:
@@ -149,6 +152,7 @@ def generate_board_html(tasks_data: str) -> str:
     </head>
     <body>
       <button id="clear-filter" style="display: none;">Clear filter</button>
+      <div id="current-filters"></div>
       <div class="board">
         {column_html}
       </div>

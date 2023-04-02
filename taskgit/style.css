@@ -71,6 +71,12 @@ body {
   align-items: flex-start;
 }
 
+.meta-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .meta-item {
   background-color: #007bff;
   color: #fff;
