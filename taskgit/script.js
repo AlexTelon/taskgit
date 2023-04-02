@@ -63,9 +63,6 @@ function updateFilter(key, value) {
 }
 
 function applyFilter() {
-  const clearFilterButton = document.getElementById("clear-filter");
-  clearFilterButton.style.display = "block";
-
   const cards = document.querySelectorAll(".card");
   cards.forEach((card) => {
     let shouldDisplay = true;
@@ -90,6 +87,14 @@ function applyFilter() {
     div.textContent = value;
     currentFilters.appendChild(div);
   });
+
+  // If we dont filter on anything remove the clear filters button.
+  if (Object.keys(filterState).length === 0) {
+    clearFilter();
+  } else {
+    const clearFilterButton = document.getElementById("clear-filter");
+    clearFilterButton.style.display = "block";
+  }
 }
 
 

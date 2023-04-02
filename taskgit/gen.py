@@ -152,7 +152,7 @@ def generate_board_html(tasks_data: str) -> str:
     </head>
     <body>
       <div class="row">
-        <button id="clear-filter" style="display: none;">Clear filter</button>
+        <button id="clear-filter" style="display: none;">Clear all filters</button>
         <div id="current-filters" class="row"></div>
       </div>
       <div class="board">
