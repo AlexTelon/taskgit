@@ -23,24 +23,16 @@ const observer = new MutationObserver((mutations) => {
   });
 });
 
-const observerOptions = {
-  childList: true,
-  subtree: true
-};
-
+const observerOptions = { childList: true, subtree: true };
 observer.observe(document.documentElement, observerOptions);
 
 
 document.addEventListener('DOMContentLoaded', function() {
   document.body.addEventListener("click", function (event) {
     if (event.target.matches(".meta-item")) {
-      const itemKey = event.target.classList[1];
-      itemValue = event.target.textContent
-      if (itemValue.includes(":")) {
-        itemValue = itemValue.split(": ")[1];
-      }
-      if (itemKey && itemValue) {
-        updateFilter(itemKey, itemValue);
+      const metaType = event.target.classList[1];
+      if (metaType) {
+        updateFilter(metaType, event.target.textContent);
       }
     }
   });
@@ -99,18 +91,16 @@ function applyFilter() {
 
 
 function clearFilter() {
-  console.log('clearFilter', filterState);
-  filterState = {}; // Add this line to reset the filterState
+  filterState = {};
 
   const cards = document.querySelectorAll(".card");
   cards.forEach((card) => {
-    console.log('clearFilter');
     card.style.display = "block";
   });
 
   const clearFilterButton = document.getElementById("clear-filter");
   clearFilterButton.style.display = "none";
-  
+
   const currentFilters = document.getElementById("current-filters");
   currentFilters.textContent = "";
 }
