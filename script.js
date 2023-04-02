@@ -11,68 +11,106 @@ for (const label of labels) {
   label.style.backgroundColor = generateColor(label.textContent);
 }
 
+// Observe changes to the DOM and apply generateColor to newly added labels
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    if (mutation.type === 'childList') {
+      const newLabels = Array.from(mutation.addedNodes).filter(node => node.classList?.contains('label'));
+      for (const label of newLabels) {
+        label.style.backgroundColor = generateColor(label.textContent);
+      }
+    }
+  });
+});
+
+const observerOptions = {
+  childList: true,
+  subtree: true
+};
+
+observer.observe(document.documentElement, observerOptions);
+
 
 document.addEventListener('DOMContentLoaded', function() {
-    var labels = document.querySelectorAll('.label');
-    labels.forEach(function(label) {
-      label.addEventListener('click', function(event) {
-        filterTasksByLabel(event.target.textContent);
-      });
-    });
-  
-    var assignees = document.querySelectorAll('.assignee');
-    assignees.forEach(function(assignee) {
-      assignee.addEventListener('click', function(event) {
-        filterTasksByAssignee(event.target.textContent.replace('Assignee: ', ''));
-      });
-    });
-  
-    var clearFilterButton = document.getElementById("clear-filter");
+  document.body.addEventListener("click", function (event) {
+    if (event.target.matches(".meta-item")) {
+      const itemKey = event.target.classList[1];
+      itemValue = event.target.textContent
+      if (itemValue.includes(":")) {
+        itemValue = itemValue.split(": ")[1];
+      }
+      if (itemKey && itemValue) {
+        updateFilter(itemKey, itemValue);
+      }
+    }
+  });
+
+  var clearFilterButton = document.getElementById("clear-filter");
     clearFilterButton.addEventListener("click", function () {
       clearFilter();
     });
-  });
-  
-  function filterTasksByLabel(labelText) {
-    var cards = document.querySelectorAll(".card");
-    var clearFilterButton = document.getElementById("clear-filter");
-    clearFilterButton.style.display = "block";
-    cards.forEach(function(card) {
-      var cardLabels = card.querySelectorAll('.label');
-      var hasLabel = false;
-      cardLabels.forEach(function(cardLabel) {
-        if (cardLabel.textContent === labelText) {
-          hasLabel = true;
-        }
-      });
-      if (hasLabel) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
-    });
+});
+
+filterState = {};
+
+function updateFilter(key, value) {
+  if (filterState[key] === value) {
+    delete filterState[key];
+  } else {
+    filterState[key] = value;
+  }
+  applyFilter();
 }
 
-function filterTasksByAssignee(assigneeText) {
-    var cards = document.querySelectorAll(".card");
-    var clearFilterButton = document.getElementById("clear-filter");
+function applyFilter() {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    let shouldDisplay = true;
+
+    for (const [key, value] of Object.entries(filterState)) {
+      const cardMetaItem = card.querySelector(`.meta-item.${key}`);
+      const cardMetaItemValue = cardMetaItem?.textContent
+      if (!cardMetaItem || cardMetaItemValue !== value) {
+        shouldDisplay = false;
+        break;
+      }
+    }
+
+    card.style.display = shouldDisplay ? "block" : "none";
+  });
+
+  const currentFilters = document.getElementById("current-filters");
+  currentFilters.textContent = "";
+  Object.entries(filterState).forEach(([key, value]) => {
+    const div = document.createElement("div");
+    div.classList.add("meta-item", key);
+    div.textContent = value;
+    currentFilters.appendChild(div);
+  });
+
+  // If we dont filter on anything remove the clear filters button.
+  if (Object.keys(filterState).length === 0) {
+    clearFilter();
+  } else {
+    const clearFilterButton = document.getElementById("clear-filter");
     clearFilterButton.style.display = "block";
-    cards.forEach(function(card) {
-        var cardAssignee = card.querySelector('.assignee');
-        if (cardAssignee.textContent.replace('Assignee: ', '') === assigneeText) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
+  }
 }
+
 
 function clearFilter() {
-    var cards = document.querySelectorAll(".card");
-    cards.forEach(function (card) {
-        card.style.display = "block";
-    });
+  console.log('clearFilter', filterState);
+  filterState = {}; // Add this line to reset the filterState
 
-    var clearFilterButton = document.getElementById("clear-filter");
-    clearFilterButton.style.display = "none";
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    console.log('clearFilter');
+    card.style.display = "block";
+  });
+
+  const clearFilterButton = document.getElementById("clear-filter");
+  clearFilterButton.style.display = "none";
+  
+  const currentFilters = document.getElementById("current-filters");
+  currentFilters.textContent = "";
 }
