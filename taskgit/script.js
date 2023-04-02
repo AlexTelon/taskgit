@@ -11,11 +11,29 @@ for (const label of labels) {
   label.style.backgroundColor = generateColor(label.textContent);
 }
 
+// Observe changes to the DOM and apply generateColor to newly added labels
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    if (mutation.type === 'childList') {
+      const newLabels = Array.from(mutation.addedNodes).filter(node => node.classList?.contains('label'));
+      for (const label of newLabels) {
+        label.style.backgroundColor = generateColor(label.textContent);
+      }
+    }
+  });
+});
+
+const observerOptions = {
+  childList: true,
+  subtree: true
+};
+
+observer.observe(document.documentElement, observerOptions);
+
 
 document.addEventListener('DOMContentLoaded', function() {
-  const metaItems = document.querySelectorAll(".meta-item");
-  metaItems.forEach((metaItem) => {
-    metaItem.addEventListener("click", function (event) {
+  document.body.addEventListener("click", function (event) {
+    if (event.target.matches(".meta-item")) {
       const itemKey = event.target.classList[1];
       itemValue = event.target.textContent
       if (itemValue.includes(":")) {
@@ -24,13 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
       if (itemKey && itemValue) {
         updateFilter(itemKey, itemValue);
       }
-    });
+    }
+  });
 
-    var clearFilterButton = document.getElementById("clear-filter");
+  var clearFilterButton = document.getElementById("clear-filter");
     clearFilterButton.addEventListener("click", function () {
       clearFilter();
     });
-  });
 });
 
 filterState = {};
@@ -59,16 +77,19 @@ function applyFilter() {
         shouldDisplay = false;
         break;
       }
-    console.log(card, shouldDisplay);
     }
 
     card.style.display = shouldDisplay ? "block" : "none";
   });
 
   const currentFilters = document.getElementById("current-filters");
-  currentFilters.textContent = Object.entries(filterState)
-    .map(([key, value]) => `${key}: ${value}`)
-    .join(", ");
+  currentFilters.textContent = "";
+  Object.entries(filterState).forEach(([key, value]) => {
+    const div = document.createElement("div");
+    div.classList.add("meta-item", key);
+    div.textContent = value;
+    currentFilters.appendChild(div);
+  });
 }
 
 
