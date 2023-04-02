@@ -97,10 +97,10 @@ labels = ["bug"]
 
 [[task]]
 title = "Add support for filters"
-description = "I want some way to filter tasks on their labels and/or assignee."
+description = "I want some way to filter tasks on their labels and/or assignee. On any meta information actually would be better!"
 assignee = "Alex Telon"
 id = 28
-column = "ongoing"
+column = "done"
 labels = ["frontend"]
 
 [[task]]
