@@ -151,8 +151,10 @@ def generate_board_html(tasks_data: str) -> str:
       <link rel="stylesheet" href="style.css">
     </head>
     <body>
-      <button id="clear-filter" style="display: none;">Clear filter</button>
-      <div id="current-filters"></div>
+      <div class="meta-wrapper">
+        <button id="clear-filter" style="display: none;">Clear filter</button>
+        <div id="current-filters"></div>
+      </div>
       <div class="board">
         {column_html}
       </div>
